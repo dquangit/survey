@@ -10,8 +10,18 @@ import Swinject
 
 class AppAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(SplashViewController.self) { r in
-            SplashViewController(viewModel: SplashViewModel())
+        container.register(SplashViewController.self) { resolver in
+            SplashViewController(
+                viewModel: SplashViewModel(),
+                resolver: resolver
+            )
+        }
+        
+        container.register(LoginViewController.self) { resolver in
+            LoginViewController(
+                viewModel: LoginViewModel(),
+                resolver: resolver
+            )
         }
     }
 }

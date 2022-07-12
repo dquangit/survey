@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		06BFAD290D1F3B1876DF4C4C /* Pods_SurveyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 066BF344A5ECEDFB76626DD5 /* Pods_SurveyTests.framework */; };
 		7A12A7CCA273898B8B526D33 /* Pods_Survey.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1414A25B53887D436643931E /* Pods_Survey.framework */; };
+		A7074BAA287DBA2800658D5B /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074BA9287DBA2800658D5B /* Dimensions.swift */; };
 		A75B5CB4287D63A100C28A1E /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB3287D63A100C28A1E /* AppAssembly.swift */; };
 		A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB5287D64A800C28A1E /* SplashViewController.swift */; };
 		A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */; };
@@ -18,6 +19,9 @@
 		A75B5CC1287D7AA900C28A1E /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC0287D7AA900C28A1E /* UIImage+Ext.swift */; };
 		A75B5CC3287D7AB700C28A1E /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC2287D7AB700C28A1E /* UIImageView+Ext.swift */; };
 		A75B5CC5287D7B9A00C28A1E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC4287D7B9A00C28A1E /* UIView+Ext.swift */; };
+		A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */; };
+		A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */; };
+		A75B5CCC287DA4FD00C28A1E /* ValidationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */; };
 		A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD0C32879725500121199 /* AppDelegate.swift */; };
 		A7BDD0CD2879725700121199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CC2879725700121199 /* Assets.xcassets */; };
 		A7BDD0D02879725700121199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CE2879725700121199 /* LaunchScreen.storyboard */; };
@@ -66,6 +70,7 @@
 		2C300E1C10030404AE02B5AA /* Pods-Survey.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey.debug.xcconfig"; path = "Target Support Files/Pods-Survey/Pods-Survey.debug.xcconfig"; sourceTree = "<group>"; };
 		6B9FBF26145C51525A871C67 /* Pods-Survey.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey.release.xcconfig"; path = "Target Support Files/Pods-Survey/Pods-Survey.release.xcconfig"; sourceTree = "<group>"; };
 		9BD60BE069D12A758A965560 /* Pods-Survey-SurveyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey-SurveyUITests.release.xcconfig"; path = "Target Support Files/Pods-Survey-SurveyUITests/Pods-Survey-SurveyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A7074BA9287DBA2800658D5B /* Dimensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		A75B5CB3287D63A100C28A1E /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		A75B5CB5287D64A800C28A1E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
@@ -75,6 +80,9 @@
 		A75B5CC0287D7AA900C28A1E /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		A75B5CC2287D7AB700C28A1E /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		A75B5CC4287D7B9A00C28A1E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationTextField.swift; sourceTree = "<group>"; };
 		A7BDD0C02879725500121199 /* Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BDD0C32879725500121199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7BDD0CC2879725700121199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -205,8 +213,6 @@
 				A7BDD0F5287975CA00121199 /* Config */,
 				A7BDD0F4287975B100121199 /* Common */,
 				A7BDD0F3287974FB00121199 /* Application */,
-				A7BDD0C32879725500121199 /* AppDelegate.swift */,
-				A7BDD0CE2879725700121199 /* LaunchScreen.storyboard */,
 				A7BDD0D12879725700121199 /* Info.plist */,
 			);
 			path = Survey;
@@ -232,6 +238,8 @@
 		A7BDD0F3287974FB00121199 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				A7BDD0CE2879725700121199 /* LaunchScreen.storyboard */,
+				A7BDD0C32879725500121199 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			children = (
 				A7BDD0FC287BBD6300121199 /* ViewController.swift */,
 				A7BDD0FE287BD3A900121199 /* ViewModelType.swift */,
+				A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -248,6 +257,7 @@
 		A7BDD0F5287975CA00121199 /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				A7074BA9287DBA2800658D5B /* Dimensions.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -356,6 +366,8 @@
 		A7BDD114287C34E700121199 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */,
+				A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -641,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */,
 				A7BDD10A287C006400121199 /* RestApi.swift in Sources */,
 				A7BDD117287C372D00121199 /* AuthTarget.swift in Sources */,
 				A7BDD10C287C2B9200121199 /* AlamofireRestApi.swift in Sources */,
@@ -657,13 +670,16 @@
 				A7BDD120287C84D400121199 /* ErrorTracker.swift in Sources */,
 				A7BDD127287C8C7600121199 /* JSONParser.swift in Sources */,
 				A7BDD10E287C2D8D00121199 /* AuthRepository.swift in Sources */,
+				A75B5CCC287DA4FD00C28A1E /* ValidationTextField.swift in Sources */,
 				A75B5CC3287D7AB700C28A1E /* UIImageView+Ext.swift in Sources */,
 				A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */,
 				A75B5CBC287D71F000C28A1E /* ServiceAssembly.swift in Sources */,
+				A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */,
 				A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */,
 				A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */,
 				A7BDD110287C306400121199 /* SurveyRepository.swift in Sources */,
 				A75B5CC5287D7B9A00C28A1E /* UIView+Ext.swift in Sources */,
+				A7074BAA287DBA2800658D5B /* Dimensions.swift in Sources */,
 				A7BDD0FD287BBD6300121199 /* ViewController.swift in Sources */,
 				A7BDD108287BE90E00121199 /* Constants.swift in Sources */,
 				A7BDD0FF287BD3A900121199 /* ViewModelType.swift in Sources */,

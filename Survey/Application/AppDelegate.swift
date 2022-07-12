@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let assembler = Assembler([AppAssembly(), ServiceAssembly()])
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        LibsManager.setupLibs()
         launchStartPage()
         return true
     }

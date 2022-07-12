@@ -9,18 +9,21 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import Swinject
 
 class ViewController: UIViewController {
-
-    var viewModel: ViewModel?
+    
+    let viewModel: ViewModel?
+    let resolver: Resolver
     let isLoading = BehaviorRelay(value: false)
     let error = PublishSubject<Error>()
     
-    init(viewModel: ViewModel?) {
-          self.viewModel = viewModel
-          super.init(nibName: nil, bundle: nil)
-            print("\(String(describing: self)) init")
-      }
+    init(viewModel: ViewModel?, resolver: Resolver) {
+        self.viewModel = viewModel
+        self.resolver = resolver
+        super.init(nibName: nil, bundle: nil)
+        print("\(String(describing: self)) init")
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()

@@ -22,5 +22,9 @@ class SplashViewController: ViewController {
         logoImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        navigationController?.setViewControllers(
+            [resolver.resolve(LoginViewController.self)!],
+            animated: false
+        )
     }
 }
