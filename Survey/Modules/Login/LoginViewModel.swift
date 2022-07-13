@@ -12,9 +12,9 @@ import RxCocoa
 class LoginViewModel: ViewModel, ViewModelType {
     
     struct Input {
-        let email: ControlProperty<String>
-        let password: ControlProperty<String>
-        let onLoginTap: ControlEvent<Void>
+        let email: Driver<String>
+        let password: Driver<String>
+        let onLoginTap: Driver<Void>
     }
     
     struct Output {
@@ -25,10 +25,14 @@ class LoginViewModel: ViewModel, ViewModelType {
     private let tokenSaved = PublishSubject<Void>()
     
     func transform(input: Input) -> Output {
-        let params = Observable.combineLatest(input.email, input.password)
+        let params = Observable.combineLatest(
+            input.email.asObservable(),
+            input.password.asObservable()
+        )
         
         input
             .onLoginTap
+            .asObservable()
             .withLatestFrom(params)
             .subscribe(onNext: { [weak self] (email, password) in
                 self?.login(email: email, password: password)

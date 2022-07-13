@@ -1,10 +1,14 @@
 PODS:
   - Alamofire (4.8.2)
+  - Cuckoo (1.8.0):
+    - Cuckoo/Swift (= 1.8.0)
+  - Cuckoo/Swift (1.8.0)
   - IQKeyboardManagerSwift (6.5.10)
   - KeychainAccess (4.2.2)
   - Nimble (10.0.0)
   - "NSObject+Rx (5.2.2)":
     - RxSwift (~> 6.2)
+  - Quick (5.0.1)
   - RxCocoa (6.5.0):
     - RxRelay (= 6.5.0)
     - RxSwift (= 6.5.0)
@@ -19,10 +23,12 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
+  - Cuckoo
   - IQKeyboardManagerSwift
   - KeychainAccess
   - Nimble
   - "NSObject+Rx"
+  - Quick
   - RxCocoa (= 6.5.0)
   - RxGesture
   - RxSwift (= 6.5.0)
@@ -32,10 +38,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Cuckoo
     - IQKeyboardManagerSwift
     - KeychainAccess
     - Nimble
     - "NSObject+Rx"
+    - Quick
     - RxCocoa
     - RxGesture
     - RxRelay
@@ -45,10 +53,12 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Cuckoo: 33cc15762a936352265c30396069f1cb160d9596
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
   Nimble: 5316ef81a170ce87baf72dd961f22f89a602ff84
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
+  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
   RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
   RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
   RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
@@ -56,6 +66,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
 
-PODFILE CHECKSUM: 99146aa8371f6242339a112637bc411f6bcab566
+PODFILE CHECKSUM: 46562505961b2d0c89d529ca08c7ab797e5ce04d
 
 COCOAPODS: 1.11.3

@@ -81,9 +81,9 @@ class LoginViewController: ViewController {
             return
         }
         let input = LoginViewModel.Input(
-            email: emailField.rx.text.orEmpty,
-            password: passwordField.rx.text.orEmpty,
-            onLoginTap: loginButton.rx.tap
+            email: emailField.rx.text.orEmpty.asDriver(),
+            password: passwordField.rx.text.orEmpty.asDriver(),
+            onLoginTap: loginButton.rx.tap.asDriver()
         )
         let output = viewModel.transform(input: input)
         output
