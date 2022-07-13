@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Swinject
 
 protocol ViewModelType {
     associatedtype Input
@@ -17,9 +18,15 @@ protocol ViewModelType {
 }
 
 class ViewModel: NSObject {
-
+    
+    let resolver: Resolver
+    
     let loading = ActivityIndicator()
 
     let error = ErrorTracker()
+    
+    init(resolver: Resolver) {
+        self.resolver = resolver
+    }
 
 }

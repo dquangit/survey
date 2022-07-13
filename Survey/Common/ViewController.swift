@@ -9,23 +9,33 @@ import UIKit
 import RxSwift
 import RxCocoa
 import NSObject_Rx
+import Swinject
 
 class ViewController: UIViewController {
-
-    var viewModel: ViewModel?
+    
+    let viewModel: ViewModel?
+    let resolver: Resolver
     let isLoading = BehaviorRelay(value: false)
     let error = PublishSubject<Error>()
     
-    init(viewModel: ViewModel?) {
-          self.viewModel = viewModel
-          super.init(nibName: nil, bundle: nil)
-            print("\(String(describing: self)) init")
-      }
+    private lazy var loadingActivity: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .white)
+        activity.isHidden = !defaultLoadingAnimation
+        return activity
+    }()
+    
+    init(viewModel: ViewModel?, resolver: Resolver) {
+        self.viewModel = viewModel
+        self.resolver = resolver
+        super.init(nibName: nil, bundle: nil)
+        print("\(String(describing: self)) init")
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
         bindViewModel()
+        configLoadingActivity()
     }
     
     required init?(coder: NSCoder) {
@@ -42,8 +52,36 @@ class ViewController: UIViewController {
             .asObservable()
             .bind(to: isLoading)
             .disposed(by: rx.disposeBag)
+        viewModel.error.drive(onNext: { [weak self] error in
+            self?.onError(error: error)
+        }).disposed(by: rx.disposeBag)
+        isLoading
+            .bind(to: loadingActivity.rx.isAnimating)
+            .disposed(by: rx.disposeBag)
     }
     
+    func onError(error: Error) {
+        if let error = error as? ErrorResponse {
+            showAlert(title: "error".localized, message: error.localizedDescription)
+            return
+        }
+        if let error = error as? AppError {
+            showAlert(title: "error".localized, message: error.message)
+            return
+        }
+    }
+    
+    private func configLoadingActivity() {
+        view.addSubview(loadingActivity)
+        loadingActivity.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    var defaultLoadingAnimation: Bool {
+        return true
+    }
+
     deinit {
         print("\(String(describing: self)) deinit")
     }

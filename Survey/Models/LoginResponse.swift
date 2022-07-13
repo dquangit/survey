@@ -8,5 +8,7 @@
 import Foundation
 
 struct LoginResponse: Codable {
-    
+    var id: String?
+    var type: String?
+    var attributes: AccessToken?
 }

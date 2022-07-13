@@ -10,4 +10,5 @@ import Foundation
 enum ImageAsset: String {
     case splashBackground
     case logo
+    case loginBackground
 }

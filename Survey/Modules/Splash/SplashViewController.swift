@@ -23,4 +23,28 @@ class SplashViewController: ViewController {
             make.center.equalToSuperview()
         }
     }
+    
+    override func bindViewModel() {
+        super.bindViewModel()
+        guard let viewModel = viewModel as? SplashViewModel else {
+            return
+        }
+        let input = SplashViewModel.Input()
+        let output = viewModel.transform(input: input)
+        output.gotoLogin.drive(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.navigationController?.setViewControllers(
+                [self.resolver.resolve(LoginViewController.self)!],
+                animated: false
+            )
+        }).disposed(by: rx.disposeBag)
+        
+        output.gotoSurveyList.drive(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.navigationController?.setViewControllers(
+                [self.resolver.resolve(SurveyListViewController.self)!],
+                animated: false
+            )
+        }).disposed(by: rx.disposeBag)
+    }
 }
