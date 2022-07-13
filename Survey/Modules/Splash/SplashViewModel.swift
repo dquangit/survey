@@ -12,6 +12,7 @@ import RxCocoa
 class SplashViewModel: ViewModel, ViewModelType {
     
     struct Input {
+        let trigger: Driver<Void>
     }
     
     struct Output {
@@ -22,7 +23,11 @@ class SplashViewModel: ViewModel, ViewModelType {
     private let signedIn = BehaviorSubject<Bool?>(value: nil)
     
     func transform(input: Input) -> Output {
-        signedIn.onNext(resolver.resolve(AuthRepository.self)!.isSignedIn)
+        input.trigger.drive(onNext: { [weak self] in
+            self?.signedIn.onNext(
+                self?.resolver.resolve(AuthRepository.self)!.isSignedIn
+            )
+        }).disposed(by: rx.disposeBag)
         return Output(
             gotoLogin: signedIn
                 .asDriverOnErrorJustComplete()

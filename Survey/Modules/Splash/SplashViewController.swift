@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
 
 class SplashViewController: ViewController {
     
@@ -29,7 +30,7 @@ class SplashViewController: ViewController {
         guard let viewModel = viewModel as? SplashViewModel else {
             return
         }
-        let input = SplashViewModel.Input()
+        let input = SplashViewModel.Input(trigger: Driver.just(()))
         let output = viewModel.transform(input: input)
         output.gotoLogin.drive(onNext: { [weak self] in
             guard let self = self else { return }
