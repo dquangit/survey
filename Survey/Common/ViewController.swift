@@ -45,8 +45,22 @@ class ViewController: UIViewController {
             .asObservable()
             .bind(to: isLoading)
             .disposed(by: rx.disposeBag)
+        viewModel.error.drive(onNext: { [weak self] error in
+            self?.onError(error: error)
+        }).disposed(by: rx.disposeBag)
     }
     
+    func onError(error: Error) {
+        if let error = error as? ErrorResponse {
+            showAlert(title: "error".localized, message: error.localizedDescription)
+            return
+        }
+        if let error = error as? AppError {
+            showAlert(title: "error".localized, message: error.message)
+            return
+        }
+    }
+
     deinit {
         print("\(String(describing: self)) deinit")
     }

@@ -12,14 +12,14 @@ class AppAssembly: Assembly {
     func assemble(container: Container) {
         container.register(SplashViewController.self) { resolver in
             SplashViewController(
-                viewModel: SplashViewModel(),
+                viewModel: SplashViewModel(resolver: resolver),
                 resolver: resolver
             )
         }
         
         container.register(LoginViewController.self) { resolver in
             LoginViewController(
-                viewModel: LoginViewModel(),
+                viewModel: LoginViewModel(resolver: resolver),
                 resolver: resolver
             )
         }

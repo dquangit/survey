@@ -14,8 +14,8 @@ class LoginViewController: ViewController {
     private lazy var logoImageView = UIImageView(asset: .logo)
     
     private lazy var emailField: UITextField = {
-        let textField = ValidationTextField()
-        textField.placeholder = "Email"
+        let textField = ValidationTextField(validator: Validator.isValidEmail)
+        textField.placeholder = "email".localized
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
@@ -24,16 +24,18 @@ class LoginViewController: ViewController {
     
     private lazy var passwordField: UITextField = {
         let textField = ValidationTextField()
-        textField.placeholder = "Password"
+        textField.placeholder = "password".localized
         textField.isSecureTextEntry = true
         return textField
     }()
     
     private lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Log in", for: .normal)
+        button.isEnabled = false
+        button.setTitle("login".localized, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.setTitleColor(.gray, for: .highlighted)
+        button.setTitleColor(.lightGray, for: .disabled)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
         button.backgroundColor = .white
         button.layer.cornerRadius = 10
@@ -71,5 +73,26 @@ class LoginViewController: ViewController {
             make.top.equalTo(passwordField.snp.bottom).offset(20)
             make.left.right.equalTo(passwordField)
         }
+    }
+    
+    override func bindViewModel() {
+        super.bindViewModel()
+        guard let viewModel = viewModel as? LoginViewModel else {
+            return
+        }
+        let input = LoginViewModel.Input(
+            email: emailField.rx.text.orEmpty,
+            password: passwordField.rx.text.orEmpty,
+            onLoginTap: loginButton.rx.tap
+        )
+        let output = viewModel.transform(input: input)
+        output
+            .loginButtonEnabled
+            .drive(loginButton.rx.isEnabled)
+            .disposed(by: rx.disposeBag)
+
+        output.loginSuccess.drive(onNext: {
+            print("Login Success")
+        }).disposed(by: rx.disposeBag)
     }
 }

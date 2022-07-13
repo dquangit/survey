@@ -9,13 +9,19 @@ import Foundation
 import Swinject
 
 class ServiceAssembly: Assembly {
+    
     func assemble(container: Container) {
-        container.register(RestApi.self) { _ in
-            AlamofireRestApi()
+        
+        container.register(AccessTokenProvider.self) { resolver in
+            AccessTokenProviderImpl()
+        }.inObjectScope(.container)
+        
+        container.register(RestApi.self) { resolver in
+            AlamofireRestApi(resolver: resolver)
         }
         
-        container.register(AuthRepository.self) { r in
-            AuthRepositoryImpl(resApi: r.resolve(RestApi.self)!)
+        container.register(AuthRepository.self) { resolver in
+            AuthRepositoryImpl(resApi: resolver.resolve(RestApi.self)!)
         }
     }
 }

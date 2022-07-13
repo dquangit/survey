@@ -11,6 +11,7 @@ target 'Survey' do
   pod 'NSObject+Rx'
   pod 'Alamofire', '4.8.2'
   pod 'IQKeyboardManagerSwift'
+  pod 'KeychainAccess'
 
   target 'SurveyTests' do
     inherit! :search_paths

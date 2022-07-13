@@ -8,12 +8,19 @@
 import Foundation
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
 class ValidationTextField: UITextField {
     
+    typealias StringValidator = (String?) -> Bool
+    
+    private let validator: (String?) -> Bool
+    
     private let padding = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
 
-    init() {
+    init(validator: @escaping StringValidator = {_ in true}) {
+        self.validator = validator
         super.init(frame: .zero)
         configUI()
     }
@@ -60,5 +67,9 @@ class ValidationTextField: UITextField {
             string: placeholder ?? "",
             attributes: [.foregroundColor: placeholderColor]
         )
+    }
+    
+    var isValidObservable: Observable<Bool> {
+        rx.text.asObservable().map(validator)
     }
 }
