@@ -7,13 +7,20 @@
 
 import Foundation
 import RxSwift
+import Swinject
 
 class AuthRepositoryImpl: AuthRepository {
     
+    var isSignedIn: Bool {
+        return resolver.resolve(AccessTokenProvider.self)!.authorization != nil
+    }
+    
+    private let resolver: Resolver
     private let restApi: RestApi
     
-    init(resApi: RestApi) {
-        self.restApi = resApi
+    init(resolver: Resolver) {
+        self.resolver = resolver
+        self.restApi = resolver.resolve(RestApi.self)!
     }
     
     func loginByEmail(email: String, password: String) -> Single<LoginResponse> {

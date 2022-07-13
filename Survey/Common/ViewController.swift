@@ -18,6 +18,12 @@ class ViewController: UIViewController {
     let isLoading = BehaviorRelay(value: false)
     let error = PublishSubject<Error>()
     
+    private lazy var loadingActivity: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .white)
+        activity.isHidden = !defaultLoadingAnimation
+        return activity
+    }()
+    
     init(viewModel: ViewModel?, resolver: Resolver) {
         self.viewModel = viewModel
         self.resolver = resolver
@@ -29,6 +35,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         makeUI()
         bindViewModel()
+        configLoadingActivity()
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +55,9 @@ class ViewController: UIViewController {
         viewModel.error.drive(onNext: { [weak self] error in
             self?.onError(error: error)
         }).disposed(by: rx.disposeBag)
+        isLoading
+            .bind(to: loadingActivity.rx.isAnimating)
+            .disposed(by: rx.disposeBag)
     }
     
     func onError(error: Error) {
@@ -59,6 +69,17 @@ class ViewController: UIViewController {
             showAlert(title: "error".localized, message: error.message)
             return
         }
+    }
+    
+    private func configLoadingActivity() {
+        view.addSubview(loadingActivity)
+        loadingActivity.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    var defaultLoadingAnimation: Bool {
+        return true
     }
 
     deinit {

@@ -11,4 +11,6 @@ import RxSwift
 protocol AuthRepository {
     func loginByEmail(email: String, password: String) -> Single<LoginResponse>
     func logout(token: String) -> Single<Void>
+    
+    var isSignedIn: Bool { get }
 }

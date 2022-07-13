@@ -48,7 +48,7 @@ class LoginViewModel: ViewModel, ViewModelType {
         resolver.resolve(AuthRepository.self)!
             .loginByEmail(email: email, password: password)
             .trackActivity(loading)
-            .catch { error in
+            .catch{ error in
                 if let error = error as? ErrorResponse,
                    error == ErrorResponse.badRequest {
                     throw AppError(message: "login_failed".localized)
@@ -57,8 +57,9 @@ class LoginViewModel: ViewModel, ViewModelType {
             }
             .trackError(error)
             .subscribe(onNext: { [weak self] response in
-                print(response.attributes?.accessToken)
-                self?.tokenSaved.onNext(())
+                guard let self = self else { return }
+                self.resolver.resolve(AccessTokenProvider.self)?.updateToken(token: response.attributes)
+                self.tokenSaved.onNext(())
             })
             .disposed(by: rx.disposeBag)
     }

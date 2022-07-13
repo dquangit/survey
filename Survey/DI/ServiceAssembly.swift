@@ -21,7 +21,7 @@ class ServiceAssembly: Assembly {
         }
         
         container.register(AuthRepository.self) { resolver in
-            AuthRepositoryImpl(resApi: resolver.resolve(RestApi.self)!)
+            AuthRepositoryImpl(resolver: resolver)
         }
     }
 }

@@ -6,44 +6,34 @@
 //
 
 import Foundation
-import Swinject
+import RxSwift
+import RxCocoa
 
 class SplashViewModel: ViewModel, ViewModelType {
     
-    override init(resolver: Resolver) {
-        super.init(resolver: resolver)
-        parse()
+    struct Input {
     }
     
-    struct Input {}
+    struct Output {
+        let gotoLogin: Driver<Void>
+        let gotoSurveyList: Driver<Void>
+    }
     
-    struct Output {}
+    private let signedIn = BehaviorSubject<Bool?>(value: nil)
     
     func transform(input: Input) -> Output {
-        return Output()
-    }
-    
-    private func parse() {
-        let response = """
-        {
-            "id": "9346",
-            "type": "token",
-            "attributes": {
-                "access_token": "-6gSzRMigkaLiZw2OqqjkyqrMVxayt36D2jDMO89adE",
-                "token_type": "Bearer",
-                "expires_in": 7200,
-                "refresh_token": "nmdnsdiL_qRb7ihBUzhCKxSLpWSY-XMg22y9ZGv_f6E",
-                "created_at": 1657699455
-            }
-        }
-        """
-        let data = Data(response.utf8)
-        do {
-            let result = try JSONParser.mapObject(LoginResponse.self, data: data)
-            print("data \(result.attributes?.createdAt)")
-        } catch {
-            print(error)
-        }
-        
+        signedIn.onNext(resolver.resolve(AuthRepository.self)!.isSignedIn)
+        return Output(
+            gotoLogin: signedIn
+                .asDriverOnErrorJustComplete()
+                .compactMap { $0 }
+                .filter { !$0 }
+                .map{_ in ()},
+            gotoSurveyList: signedIn
+                .asDriverOnErrorJustComplete()
+                .compactMap { $0 }
+                .filter { $0 }
+                .map{_ in ()}
+        )
     }
 }

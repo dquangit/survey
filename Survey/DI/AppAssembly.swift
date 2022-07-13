@@ -16,10 +16,17 @@ class AppAssembly: Assembly {
                 resolver: resolver
             )
         }
-        
+    
         container.register(LoginViewController.self) { resolver in
             LoginViewController(
                 viewModel: LoginViewModel(resolver: resolver),
+                resolver: resolver
+            )
+        }
+        
+        container.register(SurveyListViewController.self) { resolver in
+            SurveyListViewController(
+                viewModel: SurveyListViewModel(resolver: resolver),
                 resolver: resolver
             )
         }

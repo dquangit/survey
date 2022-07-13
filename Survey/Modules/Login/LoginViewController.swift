@@ -91,8 +91,12 @@ class LoginViewController: ViewController {
             .drive(loginButton.rx.isEnabled)
             .disposed(by: rx.disposeBag)
 
-        output.loginSuccess.drive(onNext: {
-            print("Login Success")
+        output.loginSuccess.drive(onNext: { [weak self] in
+            guard let self = self else { return }
+            self.navigationController?.setViewControllers(
+                [self.resolver.resolve(SurveyListViewController.self)!],
+                animated: false
+            )
         }).disposed(by: rx.disposeBag)
     }
 }
