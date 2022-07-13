@@ -23,7 +23,7 @@ final class ErrorTracker: SharedSequenceConvertibleType {
         return _subject.asObservable()
     }
 
-    private func onError(_ error: Error) {
+    func onError(_ error: Error) {
         _subject.onNext(error)
     }
 

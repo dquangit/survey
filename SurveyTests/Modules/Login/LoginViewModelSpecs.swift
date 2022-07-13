@@ -96,8 +96,7 @@ class LoginViewModelSpecs: QuickSpec {
                     email.onNext("wrong@email.com")
                     password.onNext("wrongPassword")
                     onButtonTap.onNext(())
-                    expect(loginError != nil).to(beTrue())
-                }
+                    expect(loginError).notTo(beNil())                }
             }
             
             context("login with valid credentials") {

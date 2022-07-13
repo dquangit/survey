@@ -55,6 +55,7 @@
 		A7FB9699287ED14F006C232F /* SurveyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB9698287ED14F006C232F /* SurveyListViewModel.swift */; };
 		A7FB96A0287EFD2F006C232F /* LoginViewModelSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB969F287EFD2F006C232F /* LoginViewModelSpecs.swift */; };
 		A7FB96A3287F0854006C232F /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB96A2287F0854006C232F /* GeneratedMocks.swift */; };
+		A7FB96A6287F2168006C232F /* SplashViewModelSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB96A5287F2168006C232F /* SplashViewModelSpecs.swift */; };
 		D3EE40D2BE8A436E95AEA1B0 /* Pods_Survey_SurveyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AE93C3214D7022CCEAAA7E /* Pods_Survey_SurveyUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -131,6 +132,7 @@
 		A7FB9698287ED14F006C232F /* SurveyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListViewModel.swift; sourceTree = "<group>"; };
 		A7FB969F287EFD2F006C232F /* LoginViewModelSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelSpecs.swift; sourceTree = "<group>"; };
 		A7FB96A2287F0854006C232F /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
+		A7FB96A5287F2168006C232F /* SplashViewModelSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModelSpecs.swift; sourceTree = "<group>"; };
 		C5AE93C3214D7022CCEAAA7E /* Pods_Survey_SurveyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Survey_SurveyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED53748C2A020EE013A7B0A4 /* Pods-Survey-SurveyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Survey-SurveyUITests.debug.xcconfig"; path = "Target Support Files/Pods-Survey-SurveyUITests/Pods-Survey-SurveyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F374B0DE34A470E15B4A9899 /* Pods-SurveyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SurveyTests.debug.xcconfig"; path = "Target Support Files/Pods-SurveyTests/Pods-SurveyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 		A7FB969A287EF212006C232F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A7FB96A4287F2154006C232F /* Splash */,
 				A7FB969B287EF4CD006C232F /* Login */,
 			);
 			path = Modules;
@@ -468,6 +471,14 @@
 				A7FB969F287EFD2F006C232F /* LoginViewModelSpecs.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		A7FB96A4287F2154006C232F /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				A7FB96A5287F2168006C232F /* SplashViewModelSpecs.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -791,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7FB96A6287F2168006C232F /* SplashViewModelSpecs.swift in Sources */,
 				A7FB96A0287EFD2F006C232F /* LoginViewModelSpecs.swift in Sources */,
 				A7FB96A3287F0854006C232F /* GeneratedMocks.swift in Sources */,
 			);

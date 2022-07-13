@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import UIKit
 
 class LoginViewModel: ViewModel, ViewModelType {
     
@@ -25,6 +26,7 @@ class LoginViewModel: ViewModel, ViewModelType {
     private let tokenSaved = PublishSubject<Void>()
     
     func transform(input: Input) -> Output {
+        
         let params = Observable.combineLatest(
             input.email.asObservable(),
             input.password.asObservable()
@@ -49,22 +51,25 @@ class LoginViewModel: ViewModel, ViewModelType {
     }
     
     private func login(email: String, password: String)  {
+        
         resolver.resolve(AuthRepository.self)!
             .loginByEmail(email: email, password: password)
             .trackActivity(loading)
-            .catch{ error in
-                if let error = error as? ErrorResponse,
-                   error == ErrorResponse.badRequest {
-                    throw AppError(message: "login_failed".localized)
-                }
-                throw error
-            }
-            .trackError(error)
-            .subscribe(onNext: { [weak self] response in
-                guard let self = self else { return }
-                self.resolver.resolve(AccessTokenProvider.self)?.updateToken(token: response.attributes)
-                self.tokenSaved.onNext(())
-            })
+            .subscribe(
+                onNext: { [weak self] response in
+                    guard let self = self else { return }
+                    self.resolver.resolve(AccessTokenProvider.self)?.updateToken(token: response.attributes)
+                    self.tokenSaved.onNext(())
+                },
+                onError: { [weak self] error in
+                    guard let self = self else { return }
+                    if let error = error as? ErrorResponse,
+                       error == ErrorResponse.badRequest {
+                        self.error.onError(AppError(message: "login_failed".localized))
+                        
+                    }
+                    self.error.onError(error)
+                })
             .disposed(by: rx.disposeBag)
     }
 }
