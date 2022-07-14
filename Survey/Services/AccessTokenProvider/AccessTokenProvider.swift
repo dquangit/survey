@@ -11,7 +11,8 @@ import KeychainAccess
 
 protocol AccessTokenProvider {
     func updateToken(token: AccessToken?)
-    var authorization: String? { get }
+    var accessToken: AccessToken? { get }
+    
 }
 
 class AccessTokenProviderImpl: AccessTokenProvider {
@@ -21,8 +22,7 @@ class AccessTokenProviderImpl: AccessTokenProvider {
         service: Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
     )
     
-    private var accessToken: AccessToken?
-    
+    var accessToken: AccessToken?
     
     init() {
         loadTokenFromKeychain()
@@ -31,14 +31,6 @@ class AccessTokenProviderImpl: AccessTokenProvider {
     func updateToken(token: AccessToken?) {
         self.accessToken = token
         keychain[data: Constants.accessToken] = JSONParser.encodableToData(token)
-    }
-    
-    var authorization: String? {
-        guard let token = accessToken?.accessToken,
-              let tokenType = accessToken?.tokenType else {
-            return nil
-        }
-        return "\(tokenType) \(token)"
     }
     
     private func loadTokenFromKeychain() {
