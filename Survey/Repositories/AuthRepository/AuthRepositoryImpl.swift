@@ -12,7 +12,7 @@ import Swinject
 class AuthRepositoryImpl: AuthRepository {
     
     var isSignedIn: Bool {
-        return resolver.resolve(AccessTokenProvider.self)!.authorization != nil
+        return resolver.resolve(AccessTokenProvider.self)!.accessToken?.accessToken != nil
     }
     
     private let resolver: Resolver

@@ -27,6 +27,11 @@
 		A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */; };
 		A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */; };
 		A75B5CCC287DA4FD00C28A1E /* ValidationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */; };
+		A76153B02880073F0046AACF /* SurveyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153AF2880073F0046AACF /* SurveyCollectionViewCell.swift */; };
+		A76153B228800FFF0046AACF /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B128800FFF0046AACF /* ReusableView.swift */; };
+		A76153B4288013270046AACF /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B3288013270046AACF /* DateView.swift */; };
+		A76153B6288013FE0046AACF /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B5288013FE0046AACF /* DateUtils.swift */; };
+		A76153B828801B090046AACF /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B728801B090046AACF /* Survey.swift */; };
 		A77E3A4F287E7DD300BD3D06 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */; };
 		A77E3A51287E7E3100BD3D06 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A50287E7E3100BD3D06 /* AccessToken.swift */; };
 		A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD0C32879725500121199 /* AppDelegate.swift */; };
@@ -101,6 +106,11 @@
 		A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationTextField.swift; sourceTree = "<group>"; };
+		A76153AF2880073F0046AACF /* SurveyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCollectionViewCell.swift; sourceTree = "<group>"; };
+		A76153B128800FFF0046AACF /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		A76153B3288013270046AACF /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		A76153B5288013FE0046AACF /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		A76153B728801B090046AACF /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponse.swift; sourceTree = "<group>"; };
 		A77E3A50287E7E3100BD3D06 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
 		A7BDD0C02879725500121199 /* Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +225,15 @@
 			path = AccessTokenProvider;
 			sourceTree = "<group>";
 		};
+		A78487EC287FE8A3002E4E29 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A76153AF2880073F0046AACF /* SurveyCollectionViewCell.swift */,
+				A76153B3288013270046AACF /* DateView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A7BDD0B72879725500121199 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +310,8 @@
 				A7BDD0FC287BBD6300121199 /* ViewController.swift */,
 				A7BDD0FE287BD3A900121199 /* ViewModelType.swift */,
 				A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */,
+				A76153B128800FFF0046AACF /* ReusableView.swift */,
+				A76153B5288013FE0046AACF /* DateUtils.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -334,6 +355,7 @@
 				A7074BAD287DE69800658D5B /* AppError.swift */,
 				A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */,
 				A77E3A50287E7E3100BD3D06 /* AccessToken.swift */,
+				A76153B728801B090046AACF /* Survey.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -450,6 +472,7 @@
 		A7FB9691287EB9A7006C232F /* SurveyList */ = {
 			isa = PBXGroup;
 			children = (
+				A78487EC287FE8A3002E4E29 /* Views */,
 				A7FB9696287ED138006C232F /* SurveyListViewController.swift */,
 				A7FB9698287ED14F006C232F /* SurveyListViewModel.swift */,
 			);
@@ -773,6 +796,7 @@
 				A75B5CC1287D7AA900C28A1E /* UIImage+Ext.swift in Sources */,
 				A7BDD106287BE20400121199 /* TargetType.swift in Sources */,
 				A7FB9693287EB9F4006C232F /* AccessTokenProvider.swift in Sources */,
+				A76153B828801B090046AACF /* Survey.swift in Sources */,
 				A75B5CBF287D7A8700C28A1E /* ImageAsset.swift in Sources */,
 				A7074BB0287DE93300658D5B /* UIViewController+Ext.swift in Sources */,
 				A75B5CB4287D63A100C28A1E /* AppAssembly.swift in Sources */,
@@ -786,14 +810,18 @@
 				A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */,
 				A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */,
 				A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */,
+				A76153B4288013270046AACF /* DateView.swift in Sources */,
 				A7BDD110287C306400121199 /* SurveyRepository.swift in Sources */,
 				A7074BB6287DEC7800658D5B /* String+Localization.swift in Sources */,
 				A75B5CC5287D7B9A00C28A1E /* UIView+Ext.swift in Sources */,
 				A7074BAA287DBA2800658D5B /* Dimensions.swift in Sources */,
+				A76153B228800FFF0046AACF /* ReusableView.swift in Sources */,
 				A7BDD0FD287BBD6300121199 /* ViewController.swift in Sources */,
+				A76153B6288013FE0046AACF /* DateUtils.swift in Sources */,
 				A7BDD108287BE90E00121199 /* Constants.swift in Sources */,
 				A7FB9699287ED14F006C232F /* SurveyListViewModel.swift in Sources */,
 				A7BDD0FF287BD3A900121199 /* ViewModelType.swift in Sources */,
+				A76153B02880073F0046AACF /* SurveyCollectionViewCell.swift in Sources */,
 				A7074BAC287DE01C00658D5B /* Validator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

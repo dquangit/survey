@@ -13,3 +13,4 @@
 "password_must_not_be_empty" = "Password must not be empty";
 "error" = "Error";
 "login_failed" = "Login failed";
+"today" = "Today";
