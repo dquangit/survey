@@ -22,6 +22,7 @@ public protocol TargetType {
     
     var parameterEncoding: ParameterEncoding { get }
     
+    var authorizationRequired: Bool { get }
 }
 
 extension TargetType {
@@ -32,5 +33,9 @@ extension TargetType {
 
     var headers: [String: String] {
         [:]
+    }
+    
+    var authorizationRequired: Bool {
+        return false
     }
 }
