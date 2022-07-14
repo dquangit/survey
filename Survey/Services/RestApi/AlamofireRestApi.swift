@@ -18,10 +18,10 @@ class AlamofireRestApi: RestApi {
         self.resolver = resolver
     }
     
-    func request<T: Decodable>(_ target: TargetType) -> Single<T> {
+    func request<T: Decodable>(_ target: TargetType, path: String?) -> Single<T> {
         return requestData(target).map { data in
             do {
-                return try JSONParser.mapObject(DataResponse<T>.self, data: data).data
+                return try JSONParser.mapObject(T.self, data: data, path: path)
             } catch {
                 self.debugRequest(target: target, error: error)
                 throw ErrorResponse.invalidJson
@@ -65,25 +65,6 @@ class AlamofireRestApi: RestApi {
         }
     }
     
-    private func refreshToken() -> Single<AccessToken?> {
-        guard let tokenProvider = self.resolver.resolve(AccessTokenProvider.self),
-              let refreshToken = tokenProvider.accessToken?.refreshToken else {
-            return Single.just(nil)
-        }
-        let refresh: Single<LoginResponse> = self.request(AuthTarget.refreshToken(refreshToken: refreshToken))
-        return Single.create { [refresh, tokenProvider] single in
-            return refresh.subscribe(
-                onSuccess: { response in
-                    tokenProvider.updateToken(token: response.attributes)
-                    single(.success(response.attributes))
-                },
-                onFailure: { error in
-                    single(.failure(error))
-                }
-            )
-        }
-    }
-    
     private func requestHeader(_ target: TargetType) -> Single<[String: String]> {
         guard target.authorizationRequired,
               let accessToken = resolver.resolve(AccessTokenProvider.self)?
@@ -103,9 +84,33 @@ class AlamofireRestApi: RestApi {
             return target
                 .headers
                 .merging(
-                    ["Authorization": accessToken.authorization ?? ""],
+                    ["Authorization": token?.authorization ?? ""],
                     uniquingKeysWith: { (_, new) in new }
                 )
+        }
+    }
+    
+    private func refreshToken() -> Single<AccessToken?> {
+        guard let tokenProvider = self.resolver.resolve(AccessTokenProvider.self),
+              let refreshToken = tokenProvider.accessToken?.refreshToken else {
+            return Single.just(nil)
+        }
+        let refresh: Single<LoginResponse> = self.request(
+            AuthTarget.refreshToken(
+                refreshToken: refreshToken
+            ),
+            path: "data"
+        )
+        return Single.create { [refresh, tokenProvider] single in
+            return refresh.subscribe(
+                onSuccess: { response in
+                    tokenProvider.updateToken(token: response.attributes)
+                    single(.success(response.attributes))
+                },
+                onFailure: { error in
+                    single(.failure(error))
+                }
+            )
         }
     }
     

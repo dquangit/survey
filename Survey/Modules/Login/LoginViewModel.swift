@@ -51,7 +51,6 @@ class LoginViewModel: ViewModel, ViewModelType {
     }
     
     private func login(email: String, password: String)  {
-        
         resolver.resolve(AuthRepository.self)!
             .loginByEmail(email: email, password: password)
             .trackActivity(loading)
@@ -65,11 +64,13 @@ class LoginViewModel: ViewModel, ViewModelType {
                     guard let self = self else { return }
                     if let error = error as? ErrorResponse,
                        error == ErrorResponse.badRequest {
-                        self.error.onError(AppError(message: "login_failed".localized))
-                        
+                        self.error.onError(
+                            AppError(message: "login_failed".localized)
+                        )
                     }
                     self.error.onError(error)
-                })
+                }
+            )
             .disposed(by: rx.disposeBag)
     }
 }

@@ -23,7 +23,7 @@ enum AuthTarget: TargetType {
             return "oauth/revoke"
         }
     }
-    
+
     var method: HTTPMethod {
         return .post
     }

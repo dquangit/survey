@@ -28,7 +28,8 @@ class AuthRepositoryImpl: AuthRepository {
             AuthTarget.loginByEmail(
                 email: email,
                 password: password
-            )
+            ),
+            path: "data"
         )
     }
     

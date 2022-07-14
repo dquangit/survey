@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-14 07:58:40 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-14 12:56:29 +0000
 
 //
 //  AuthRepository.swift

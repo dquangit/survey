@@ -14,6 +14,8 @@ class SurveyListViewController: ViewController {
     private lazy var dateView = DateView()
     
     private lazy var userImageView = UIImageView(asset: .userPicture)
+    private let onTakeSurvey = PublishSubject<Survey>()
+    private let onLoadMore = PublishSubject<Void>()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,8 +30,6 @@ class SurveyListViewController: ViewController {
         )
         collectionView.backgroundColor = .white
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .cyan
         collectionView.contentInset = .zero
         collectionView.isPagingEnabled = true
         return collectionView
@@ -40,6 +40,8 @@ class SurveyListViewController: ViewController {
         pageControl.pageIndicatorTintColor = .white.withAlphaComponent(0.5)
         pageControl.currentPageIndicatorTintColor = .white
         pageControl.hidesForSinglePage = true
+        pageControl.isSkeletonable = true
+        pageControl.skeletonCornerRadius = 8
         return pageControl
     }()
     
@@ -56,10 +58,9 @@ class SurveyListViewController: ViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         dateView.snp.makeConstraints { make in
             if #available(iOS 11.0, *) {
-                make.top.equalTo(view.safeAreaLayoutGuide).offset(28)
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28)
             } else {
                 make.top.equalToSuperview().offset(28)
             }
@@ -79,21 +80,49 @@ class SurveyListViewController: ViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func bindViewModel() {
         super.bindViewModel()
-        let data = Driver.of([Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey(), Survey()])
-        data.drive(
+        guard let viewModel = viewModel as? SurveyListViewModel else { return }
+    
+        let input = SurveyListViewModel.Input(
+            getSurveyList: Driver.just(()),
+            loadMore: onLoadMore.asDriverOnErrorJustComplete(),
+            onTakeSurvey: onTakeSurvey.asDriverOnErrorJustComplete()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+        output.surveys.drive(
             collectionView.rx.items(
                 cellIdentifier: SurveyCollectionViewCell.identifier,
                 cellType: SurveyCollectionViewCell.self
-            )) { (index, value, cell) in
-                cell.bindData(survey: Survey())
+            )) { [weak self] (index, value, cell) in
+                cell.bindData(survey: value)
+                cell.onTakeSurveyTap = {
+                    guard let survey = value else {
+                        return
+                    }
+                    self?.onTakeSurvey.onNext(survey)
+                }
             }.disposed(by: rx.disposeBag)
         
-        data
+        output.surveys
             .map{ $0.count }
             .drive(pageControl.rx.numberOfPages)
             .disposed(by: rx.disposeBag)
+        
+        output.gotoSurveyDetails.drive(onNext: { [weak self] survey in
+            guard let self = self,
+                  let surveyDetailVC = self.resolver.resolve(SurveyDetailViewController.self, argument: survey) else {
+                return
+            }
+            self.navigationController?.pushViewController(surveyDetailVC, animated: true)
+        }).disposed(by: rx.disposeBag)
         
         collectionView
             .rx
@@ -101,6 +130,25 @@ class SurveyListViewController: ViewController {
             .map { point in
                 Int(point.x/UIScreen.main.bounds.width)
             }.bind(to: pageControl.rx.currentPage)
+            .disposed(by: rx.disposeBag)
+        
+        let loadMoreData = Driver.combineLatest(
+            output.surveys ,
+            output.canLoadMore
+        )
+        
+        collectionView
+            .rx
+            .willDisplayCell.withLatestFrom(
+                loadMoreData,
+                resultSelector: { (willDisplayCell, data) -> Bool in
+                    let (_, indexPath) = willDisplayCell
+                    let (surveys, canLoadMore) = data
+                    return indexPath.row == surveys.count - 1 && canLoadMore
+                })
+            .filter { $0 }
+            .mapToVoid()
+            .bind(to: onLoadMore)
             .disposed(by: rx.disposeBag)
         
         pageControl.rx.controlEvent(.valueChanged)
@@ -118,5 +166,17 @@ class SurveyListViewController: ViewController {
                 )
             })
             .disposed(by: rx.disposeBag)
+        
+        isLoading.subscribe(onNext: { [weak self] loading in
+            if (loading) {
+                self?.pageControl.showAnimatedGradientSkeleton()
+                return
+            }
+            self?.pageControl.hideSkeleton()
+        }).disposed(by: rx.disposeBag)
+    }
+    
+    override var defaultLoadingAnimation: Bool {
+        return false
     }
 }

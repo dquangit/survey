@@ -13,4 +13,5 @@ enum ImageAsset: String {
     case loginBackground
     case nextButton
     case userPicture
+    case darkGradient
 }

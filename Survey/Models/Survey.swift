@@ -8,5 +8,7 @@
 import Foundation
 
 struct Survey: Codable {
-    
+    var title: String?
+    var description: String?
+    var coverImageUrl: String?
 }
