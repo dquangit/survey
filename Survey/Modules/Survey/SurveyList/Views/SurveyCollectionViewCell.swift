@@ -20,6 +20,12 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         return imageView
     }()
     
+    private lazy var overlayView: UIView = {
+        let view = UIView()
+        view.alpha = 0.6
+        return view
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 28)
@@ -65,6 +71,7 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         contentView.addSubviews(
             [
                 backgroundImage,
+                overlayView,
                 titleLabel,
                 descriptionLabel,
                 takeSurveyButton
@@ -72,6 +79,10 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         )
 
         backgroundImage.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        overlayView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     
@@ -108,5 +119,13 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         contentView.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
         titleLabel.text = survey.title
         descriptionLabel.text = survey.description
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        overlayView.setGradientBackground(
+            colorTop: .black.withAlphaComponent(0.01),
+            colorBottom: .black
+        )
     }
 }
