@@ -44,6 +44,8 @@
 		A762ED0628807D1A00CDE2D3 /* SurveyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762ED0528807D1A00CDE2D3 /* SurveyDetailViewController.swift */; };
 		A77E3A4F287E7DD300BD3D06 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */; };
 		A77E3A51287E7E3100BD3D06 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A50287E7E3100BD3D06 /* AccessToken.swift */; };
+		A784CDEE28817F1C00B37EE6 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */; };
+		A784CDF028818A7000B37EE6 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */; };
 		A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD0C32879725500121199 /* AppDelegate.swift */; };
 		A7BDD0CD2879725700121199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CC2879725700121199 /* Assets.xcassets */; };
 		A7BDD0D02879725700121199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CE2879725700121199 /* LaunchScreen.storyboard */; };
@@ -133,6 +135,8 @@
 		A762ED0528807D1A00CDE2D3 /* SurveyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDetailViewController.swift; sourceTree = "<group>"; };
 		A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponse.swift; sourceTree = "<group>"; };
 		A77E3A50287E7E3100BD3D06 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		A7BDD0C02879725500121199 /* Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BDD0C32879725500121199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7BDD0CC2879725700121199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -279,6 +283,15 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		A784CDEC28817D7000B37EE6 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */,
+				A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		A7BDD0B72879725500121199 = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +424,7 @@
 		A7BDD0F9287975FC00121199 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A784CDEC28817D7000B37EE6 /* SideMenu */,
 				A7BDD115287C34F700121199 /* Survey */,
 				A7BDD114287C34E700121199 /* Login */,
 				A7BDD113287C328500121199 /* Splash */,
@@ -836,6 +850,7 @@
 				A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */,
 				A7BDD10A287C006400121199 /* RestApi.swift in Sources */,
 				A751BC272881625D00BF82BB /* UserRepositoryImpl.swift in Sources */,
+				A784CDF028818A7000B37EE6 /* SideMenuViewModel.swift in Sources */,
 				A7BDD117287C372D00121199 /* AuthTarget.swift in Sources */,
 				A77E3A4F287E7DD300BD3D06 /* DataResponse.swift in Sources */,
 				A7BDD10C287C2B9200121199 /* AlamofireRestApi.swift in Sources */,
@@ -867,6 +882,7 @@
 				A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */,
 				A762ED00288053D800CDE2D3 /* SurveyTarget.swift in Sources */,
 				A75B5CBC287D71F000C28A1E /* ServiceAssembly.swift in Sources */,
+				A784CDEE28817F1C00B37EE6 /* SideMenuViewController.swift in Sources */,
 				A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */,
 				A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */,
 				A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */,

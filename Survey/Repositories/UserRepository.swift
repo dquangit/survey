@@ -10,5 +10,6 @@ import RxSwift
 
 protocol UserRepository {
     func getUserProfile() -> Single<User?>
+    func clearCurrentUser()
     var userObservable: Observable<User?> { get }
 }

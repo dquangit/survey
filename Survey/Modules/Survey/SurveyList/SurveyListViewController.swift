@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import Kingfisher
+import SideMenu
 
 class SurveyListViewController: ViewController {
     
@@ -27,6 +28,9 @@ class SurveyListViewController: ViewController {
         imageView.layer.cornerRadius = 18
         imageView.clipsToBounds = true
         imageView.skeletonCornerRadius = 18
+        imageView.rx.tap().subscribe(onNext: { [weak self] in
+            self?.showSideMenu()
+        }).disposed(by: rx.disposeBag)
         return imageView
     }()
     
@@ -96,19 +100,20 @@ class SurveyListViewController: ViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        dateView.snp.makeConstraints { make in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28)
-            } else {
-                make.top.equalToSuperview().offset(28)
-            }
-            make.left.equalToSuperview().offset(20)
-            make.right.equalTo(userImageView.snp.left).offset(-20)
-        }
         
         userImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(dateView)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(45)
+            } else {
+                make.top.equalToSuperview().offset(45)
+            }
             make.right.equalToSuperview().offset(-20)
+        }
+        
+        dateView.snp.makeConstraints { make in
+            make.centerY.equalTo(userImageView)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalTo(userImageView.snp.left).offset(-20)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -167,7 +172,7 @@ class SurveyListViewController: ViewController {
         }).disposed(by: rx.disposeBag)
         
         let loadMoreData = Driver.combineLatest(
-            output.surveys ,
+            output.surveys,
             output.canLoadMore
         )
         
@@ -203,6 +208,21 @@ class SurveyListViewController: ViewController {
     
     @objc func refresh() {
         onRefresh.onNext(())
+    }
+    
+    private func showSideMenu() {
+        let sideMenuVC = SideMenuViewController(viewModel: SideMenuViewModel(resolver: resolver), resolver: resolver)
+        sideMenuVC.onLogoutSuccess = { [weak self] in
+            self?.backToLogin()
+        }
+        let menu = SideMenuNavigationController(rootViewController: sideMenuVC)
+        menu.presentationStyle = .menuSlideIn
+        self.present(menu, animated: true, completion: nil)
+    }
+    
+    private func backToLogin() {
+        let loginVC = resolver.resolve(LoginViewController.self)!
+        self.navigationController?.setViewControllers([loginVC], animated: true)
     }
     
     override var defaultLoadingAnimation: Bool {

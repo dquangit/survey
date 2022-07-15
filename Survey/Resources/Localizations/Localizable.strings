@@ -14,3 +14,9 @@
 "error" = "Error";
 "login_failed" = "Login failed";
 "today" = "Today";
+"logout" = "Logout";
+"bad_request" = "Bad request";
+"unauthorized" = "Unauthorized";
+"forbidden" = "Forbidden";
+"not_found" = "Not Found";
+"technical_issue" = "Technical issue";

@@ -22,7 +22,10 @@ class UserRepositoryImpl: NSObject, UserRepository {
     }
     
     func getUserProfile() -> Single<User?> {
-        return Single.create { create in
+        return Single.create { [weak self] create in
+            guard let self = self else {
+                return Disposables.create {}
+            }
             let response: Single<UserResponse> = self.restApi.request(UserTarget.getUserProfile, path: "data")
             return response.subscribe(
                 onSuccess: { userResponse in
@@ -33,6 +36,10 @@ class UserRepositoryImpl: NSObject, UserRepository {
                 }
             )
         }
+    }
+    
+    func clearCurrentUser() {
+        userSubject.onNext(nil)
     }
     
     var userObservable: Observable<User?> {
