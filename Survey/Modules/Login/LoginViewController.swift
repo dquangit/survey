@@ -19,6 +19,7 @@ class LoginViewController: ViewController {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.autocorrectionType = .no
+        textField.alpha = 0
         return textField
     }()
     
@@ -26,6 +27,7 @@ class LoginViewController: ViewController {
         let textField = ValidationTextField()
         textField.placeholder = "password".localized
         textField.isSecureTextEntry = true
+        textField.alpha = 0
         return textField
     }()
     
@@ -42,6 +44,7 @@ class LoginViewController: ViewController {
         button.snp.makeConstraints { make in
             make.height.equalTo(Dimensions.buttonHeight)
         }
+        button.alpha = 0
         return button
     }()
     
@@ -58,8 +61,7 @@ class LoginViewController: ViewController {
             make.edges.equalToSuperview()
         }
         logoImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(view).dividedBy(2)
-            make.centerX.equalToSuperview()
+            make.center.equalToSuperview()
         }
         passwordField.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
@@ -73,6 +75,25 @@ class LoginViewController: ViewController {
             make.top.equalTo(passwordField.snp.bottom).offset(20)
             make.left.right.equalTo(passwordField)
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            options: .curveEaseInOut,
+            animations: {
+                self.logoImageView.snp.remakeConstraints { make in
+                    make.centerY.equalToSuperview().dividedBy(2)
+                    make.centerX.equalToSuperview()
+                }
+                self.view.layoutIfNeeded()
+                self.emailField.alpha = 1
+                self.passwordField.alpha = 1
+                self.loginButton.alpha = 1
+            }
+        )
     }
     
     override func bindViewModel() {

@@ -12,7 +12,6 @@ import KeychainAccess
 protocol AccessTokenProvider {
     func updateToken(token: AccessToken?)
     var accessToken: AccessToken? { get }
-    
 }
 
 class AccessTokenProviderImpl: AccessTokenProvider {
@@ -28,7 +27,7 @@ class AccessTokenProviderImpl: AccessTokenProvider {
     }
     
     func updateToken(token: AccessToken?) {
-        print("UPDATE TOKEN \(token?.accessToken)")
+        print("UPDATE TOKEN \(String(describing: token?.accessToken))")
         self.accessToken = token
         keychain[data: Constants.accessToken] = JSONParser.encodableToData(token)
     }
