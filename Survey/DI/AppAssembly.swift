@@ -30,5 +30,13 @@ class AppAssembly: Assembly {
                 resolver: resolver
             )
         }
+        
+        container.register(SurveyDetailViewController.self) { (resolver, survey) in
+            SurveyDetailViewController(
+                viewModel: nil,
+                resolver: resolver,
+                survey: survey
+            )
+        }
     }
 }

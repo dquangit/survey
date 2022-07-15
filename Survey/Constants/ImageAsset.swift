@@ -11,4 +11,7 @@ enum ImageAsset: String {
     case splashBackground
     case logo
     case loginBackground
+    case nextButton
+    case userPicture
+    case darkGradient
 }

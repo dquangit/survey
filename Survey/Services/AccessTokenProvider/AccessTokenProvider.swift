@@ -17,7 +17,6 @@ protocol AccessTokenProvider {
 
 class AccessTokenProviderImpl: AccessTokenProvider {
     
-    
     private let keychain = Keychain(
         service: Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? ""
     )
@@ -29,6 +28,7 @@ class AccessTokenProviderImpl: AccessTokenProvider {
     }
     
     func updateToken(token: AccessToken?) {
+        print("UPDATE TOKEN \(token?.accessToken)")
         self.accessToken = token
         keychain[data: Constants.accessToken] = JSONParser.encodableToData(token)
     }

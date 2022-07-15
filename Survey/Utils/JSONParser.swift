@@ -27,12 +27,35 @@ class JSONParser {
         return try? encoder.encode(object)
     }
 
-    static func mapObject<T: Decodable>(_ type: T.Type, data: Data) throws -> T {
-        return try decoder.decode(T.self, from: data)
+    static func mapObject<T: Decodable>(
+        _ type: T.Type,
+        data: Data,
+        path: String? = nil
+    ) throws -> T {
+        
+        return try decoder.decode(T.self, from: getJsonData(data, path: path))
     }
 
     static func mapArray<T: Decodable>(_ type: T.Type, data: Data) throws -> [T] {
         return try decoder.decode([T].self, from: data)
+    }
+    
+    private static func getJsonData(
+        _ data: Data,
+        path: String? = nil
+    ) throws -> Data {
+        var jsonObject = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject
+        if let path = path {
+            guard let specificObject = jsonObject.value(forKeyPath: path) else {
+                throw ErrorResponse.invalidJson
+            }
+            jsonObject = specificObject as AnyObject
+        }
+        if !JSONSerialization.isValidJSONObject(jsonObject) {
+            throw ErrorResponse.invalidJson
+        }
+        return try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+        
     }
 }
 

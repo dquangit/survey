@@ -8,5 +8,6 @@
 import Foundation
 
 struct DataResponse<T: Decodable>: Decodable {
-    var data: T
+    var data: T?
+    var meta: Pagination?
 }

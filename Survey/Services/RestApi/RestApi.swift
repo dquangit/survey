@@ -9,6 +9,12 @@ import Foundation
 import RxSwift
 
 protocol RestApi {
-    func request<T: Decodable>(_ target: TargetType) -> Single<T>
+    func request<T: Decodable>(_ target: TargetType, path: String?) -> Single<T>
     func requestData(_ target: TargetType) -> Single<Data>
+}
+
+extension RestApi {
+    func request<T: Decodable>(_ target: TargetType) -> Single<T> {
+        return request(target, path: nil)
+    }
 }

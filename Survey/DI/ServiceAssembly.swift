@@ -23,5 +23,9 @@ class ServiceAssembly: Assembly {
         container.register(AuthRepository.self) { resolver in
             AuthRepositoryImpl(resolver: resolver)
         }
+        
+        container.register(SurveyRepository.self) { resolver in
+            SurveyRepositoryImpl(resolver: resolver)
+        }
     }
 }

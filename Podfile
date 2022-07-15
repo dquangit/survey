@@ -16,6 +16,8 @@ target 'Survey' do
   pod 'Alamofire', '4.8.2'
   pod 'IQKeyboardManagerSwift'
   pod 'KeychainAccess'
+  pod 'Kingfisher'
+  pod 'SkeletonView'
 
   target 'SurveyTests' do
     inherit! :search_paths

@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     
     private lazy var loadingActivity: UIActivityIndicatorView = {
         let activity = UIActivityIndicatorView(style: .white)
-        activity.isHidden = !defaultLoadingAnimation
         return activity
     }()
     
@@ -56,8 +55,14 @@ class ViewController: UIViewController {
             self?.onError(error: error)
         }).disposed(by: rx.disposeBag)
         isLoading
-            .bind(to: loadingActivity.rx.isAnimating)
+            .distinctUntilChanged()
+            .bind(onNext: { [weak self] loading in
+                guard let self = self else { return }
+                loading ? self.loadingActivity.startAnimating() : self.loadingActivity.stopAnimating()
+                self.loadingActivity.isHidden = !loading || !self.defaultLoadingAnimation
+            })
             .disposed(by: rx.disposeBag)
+       
     }
     
     func onError(error: Error) {

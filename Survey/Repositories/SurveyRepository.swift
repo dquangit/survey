@@ -6,3 +6,8 @@
 //
 
 import Foundation
+import RxSwift
+
+protocol SurveyRepository {
+    func getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>
+}
