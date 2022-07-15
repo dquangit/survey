@@ -13,6 +13,7 @@ class DateView: UIView {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 14)
         label.textColor = .white
+        label.isSkeletonable = true
         label.text = DateUtils.dateInWeek(Date())?.uppercased()
         return label
     }()
@@ -22,12 +23,15 @@ class DateView: UIView {
         label.font = .boldSystemFont(ofSize: 34)
         label.textColor = .white
         label.text = "today".localized
+        label.isSkeletonable = true
+        label.skeletonTextLineHeight = .fixed(30)
         return label
     }()
     
     init() {
         super.init(frame: .zero)
         makeUI()
+        isSkeletonable = true
     }
     
     required init?(coder: NSCoder) {

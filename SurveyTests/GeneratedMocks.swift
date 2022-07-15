@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-15 06:48:27 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-15 08:23:08 +0000
 
 //
 //  AuthRepository.swift
@@ -224,7 +224,7 @@ import RxSwift
 
 
 
-// MARK: - Mocks generated from file: Survey/Repositories/SurveyRepository.swift at 2022-07-15 06:48:27 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/SurveyRepository.swift at 2022-07-15 08:23:08 +0000
 
 //
 //  SurveyRepository.swift

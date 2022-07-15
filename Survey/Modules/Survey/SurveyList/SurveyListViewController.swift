@@ -8,16 +8,27 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
 
 class SurveyListViewController: ViewController {
     
     private let onRefresh = PublishSubject<Void>()
+    private let onTakeSurvey = PublishSubject<Survey>()
+    private let onLoadMore = PublishSubject<Void>()
     
     private lazy var dateView = DateView()
     
-    private lazy var userImageView = UIImageView(asset: .userPicture)
-    private let onTakeSurvey = PublishSubject<Survey>()
-    private let onLoadMore = PublishSubject<Void>()
+    private lazy var userImageView: UIImageView = {
+        let imageView = UIImageView(asset: .userPicture)
+        imageView.isSkeletonable = true
+        imageView.snp.makeConstraints { make in
+            make.size.equalTo(36)
+        }
+        imageView.layer.cornerRadius = 18
+        imageView.clipsToBounds = true
+        imageView.skeletonCornerRadius = 18
+        return imageView
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -81,7 +92,7 @@ class SurveyListViewController: ViewController {
             dateView,
             pageControl
         ])
-        
+        view.isSkeletonable = true
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -98,7 +109,6 @@ class SurveyListViewController: ViewController {
         userImageView.snp.makeConstraints { make in
             make.centerY.equalTo(dateView)
             make.right.equalToSuperview().offset(-20)
-            make.size.equalTo(36)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -175,12 +185,19 @@ class SurveyListViewController: ViewController {
             .bind(to: onLoadMore)
             .disposed(by: rx.disposeBag)
         
+        output.avatarUrl.drive(onNext: { [weak self] url in
+            self?.userImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(asset: .userPicture)
+            )
+        }).disposed(by: rx.disposeBag)
+        
         isLoading.subscribe(onNext: { [weak self] loading in
             if (loading) {
-                self?.pageControl.showAnimatedGradientSkeleton()
+                self?.view.showAnimatedGradientSkeleton()
                 return
             }
-            self?.pageControl.hideSkeleton()
+            self?.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
         }).disposed(by: rx.disposeBag)
     }
     

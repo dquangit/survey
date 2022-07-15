@@ -32,12 +32,7 @@ class JSONParser {
         data: Data,
         path: String? = nil
     ) throws -> T {
-        
         return try decoder.decode(T.self, from: getJsonData(data, path: path))
-    }
-
-    static func mapArray<T: Decodable>(_ type: T.Type, data: Data) throws -> [T] {
-        return try decoder.decode([T].self, from: data)
     }
     
     private static func getJsonData(

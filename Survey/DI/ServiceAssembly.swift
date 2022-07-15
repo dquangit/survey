@@ -16,6 +16,10 @@ class ServiceAssembly: Assembly {
             AccessTokenProviderImpl()
         }.inObjectScope(.container)
         
+        container.register(UserRepository.self) { resolver in
+            UserRepositoryImpl(resolver: resolver)
+        }.inObjectScope(.container)
+        
         container.register(RestApi.self) { resolver in
             AlamofireRestApi(resolver: resolver)
         }

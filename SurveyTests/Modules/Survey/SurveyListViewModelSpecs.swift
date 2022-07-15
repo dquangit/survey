@@ -93,10 +93,10 @@ class SurveyListViewModelSpecs: QuickSpec {
         stub(mockSurveyRepository) { stub in
 
             when(stub.getSurveyList(page: 1, size: Pagination.defaultPageSize))
-                .thenReturn(Single.just(self.mockDataGenerate(from: 0, to: 5, page: 1)))
+                .thenReturn(Single.just(self.generateMockData(from: 0, to: 5, page: 1)))
             
             when(stub.getSurveyList(page: 2, size: Pagination.defaultPageSize))
-                .thenReturn(Single.just(self.mockDataGenerate(from: 5, to: 10, page: 2)))
+                .thenReturn(Single.just(self.generateMockData(from: 5, to: 10, page: 2)))
             
             when(stub.getSurveyList(page: 3, size: Pagination.defaultPageSize))
                 .thenReturn(Single.just(DataResponse<[SurveyResponse]>()))
@@ -109,7 +109,7 @@ class SurveyListViewModelSpecs: QuickSpec {
         return container
     }
     
-    private func mockDataGenerate(from: Int, to: Int, page: Int) -> DataResponse<[SurveyResponse]> {
+    private func generateMockData(from: Int, to: Int, page: Int) -> DataResponse<[SurveyResponse]> {
         return DataResponse(
             data: (from..<to).map {
                 SurveyResponse(
