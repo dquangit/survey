@@ -1,0 +1,83 @@
+PODS:
+  - Alamofire (4.8.2)
+  - Cuckoo (1.8.0):
+    - Cuckoo/Swift (= 1.8.0)
+  - Cuckoo/Swift (1.8.0)
+  - IQKeyboardManagerSwift (6.5.10)
+  - KeychainAccess (4.2.2)
+  - Kingfisher (6.3.1)
+  - Nimble (9.2.1)
+  - "NSObject+Rx (5.2.2)":
+    - RxSwift (~> 6.2)
+  - Quick (5.0.1)
+  - RxCocoa (6.5.0):
+    - RxRelay (= 6.5.0)
+    - RxSwift (= 6.5.0)
+  - RxGesture (4.0.4):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.5.0):
+    - RxSwift (= 6.5.0)
+  - RxSwift (6.5.0)
+  - SideMenu (6.5.0)
+  - SkeletonView (1.29.2)
+  - SnapKit (5.6.0)
+  - Swinject (2.8.1)
+
+DEPENDENCIES:
+  - Alamofire (= 4.8.2)
+  - Cuckoo
+  - IQKeyboardManagerSwift
+  - KeychainAccess
+  - Kingfisher
+  - Nimble
+  - "NSObject+Rx"
+  - Quick
+  - RxCocoa (= 6.5.0)
+  - RxGesture
+  - RxSwift (= 6.5.0)
+  - SideMenu
+  - SkeletonView
+  - SnapKit (= 5.6.0)
+  - Swinject (= 2.8.1)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Cuckoo
+    - IQKeyboardManagerSwift
+    - KeychainAccess
+    - Kingfisher
+    - Nimble
+    - "NSObject+Rx"
+    - Quick
+    - RxCocoa
+    - RxGesture
+    - RxRelay
+    - RxSwift
+    - SideMenu
+    - SkeletonView
+    - SnapKit
+    - Swinject
+
+SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Cuckoo: 33cc15762a936352265c30396069f1cb160d9596
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  Kingfisher: 016c8b653a35add51dd34a3aba36b580041acc74
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
+  "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
+  Quick: 749aa754fd1e7d984f2000fe051e18a3a9809179
+  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
+  RxGesture: f3efb47ed2d26a8082f7b660d4a59970e275a7f8
+  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
+  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SkeletonView: 915a80ecc2b6421ab7ac0f0212321c0cc1406472
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
+
+PODFILE CHECKSUM: 3a801d130f9f8c8fd93012d953648eedc9057e45
+
+COCOAPODS: 1.11.3

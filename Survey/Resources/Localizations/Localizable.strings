@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  Survey
+
+  Created by Quang Pham on 13/07/2022.
+  
+*/
+
+"email" = "Email";
+"password" = "Password";
+"login" = "Log in";
+"invalid_email" = "Invalid email";
+"password_must_not_be_empty" = "Password must not be empty";
+"error" = "Error";
+"login_failed" = "Login failed";
+"today" = "Today";
+"logout" = "Logout";
+"bad_request" = "Bad request";
+"unauthorized" = "Unauthorized";
+"forbidden" = "Forbidden";
+"not_found" = "Not Found";
+"technical_issue" = "Technical issue";
