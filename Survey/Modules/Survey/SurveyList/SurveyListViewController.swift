@@ -11,6 +11,8 @@ import RxCocoa
 
 class SurveyListViewController: ViewController {
     
+    private let onRefresh = PublishSubject<Void>()
+    
     private lazy var dateView = DateView()
     
     private lazy var userImageView = UIImageView(asset: .userPicture)
@@ -85,12 +87,17 @@ class SurveyListViewController: ViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refresh()
+    }
+    
     override func bindViewModel() {
         super.bindViewModel()
         guard let viewModel = viewModel as? SurveyListViewModel else { return }
     
         let input = SurveyListViewModel.Input(
-            getSurveyList: Driver.just(()),
+            getSurveyList: onRefresh.asDriverOnErrorJustComplete(),
             loadMore: onLoadMore.asDriverOnErrorJustComplete(),
             onTakeSurvey: onTakeSurvey.asDriverOnErrorJustComplete()
         )
@@ -151,6 +158,13 @@ class SurveyListViewController: ViewController {
             .bind(to: onLoadMore)
             .disposed(by: rx.disposeBag)
         
+        collectionView.rx.didScroll.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            if self.collectionView.contentOffset.x < Capacity.pullToRefreshOffset {
+                self.refresh()
+            }
+        }).disposed(by: rx.disposeBag)
+        
         pageControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else {
@@ -174,6 +188,10 @@ class SurveyListViewController: ViewController {
             }
             self?.pageControl.hideSkeleton()
         }).disposed(by: rx.disposeBag)
+    }
+    
+    @objc func refresh() {
+        onRefresh.onNext(())
     }
     
     override var defaultLoadingAnimation: Bool {

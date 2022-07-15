@@ -11,13 +11,14 @@ import SkeletonView
 
 class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
     
+    var onTakeSurveyTap: (() -> Void)?
+    
     private lazy var backgroundImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
     }()
-    var onTakeSurveyTap: (() -> Void)?
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()

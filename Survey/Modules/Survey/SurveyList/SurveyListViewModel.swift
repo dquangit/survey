@@ -36,7 +36,6 @@ class SurveyListViewModel: ViewModel, ViewModelType {
         input.loadMore.drive(onNext: { [weak self] in
             self?.getSurvey(loadMore: true)
         }).disposed(by: rx.disposeBag)
-        surveys.bind(onNext: { print("Count \($0.count)") }).disposed(by: rx.disposeBag)
         return Output(
             surveys: surveys.asDriver(),
             gotoSurveyDetails: input.onTakeSurvey,
