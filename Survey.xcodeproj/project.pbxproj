@@ -16,6 +16,10 @@
 		A7074BB3287DEAA200658D5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7074BB2287DEAA200658D5B /* Localizable.strings */; };
 		A7074BB6287DEC7800658D5B /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074BB5287DEC7800658D5B /* String+Localization.swift */; };
 		A751BC1E2881249300BF82BB /* SurveyListViewModelSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC1D2881249300BF82BB /* SurveyListViewModelSpecs.swift */; };
+		A751BC202881610500BF82BB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC1F2881610500BF82BB /* User.swift */; };
+		A751BC222881620900BF82BB /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC212881620900BF82BB /* UserRepository.swift */; };
+		A751BC252881624B00BF82BB /* UserTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC242881624B00BF82BB /* UserTarget.swift */; };
+		A751BC272881625D00BF82BB /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC262881625D00BF82BB /* UserRepositoryImpl.swift */; };
 		A75B5CB4287D63A100C28A1E /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB3287D63A100C28A1E /* AppAssembly.swift */; };
 		A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB5287D64A800C28A1E /* SplashViewController.swift */; };
 		A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */; };
@@ -40,6 +44,8 @@
 		A762ED0628807D1A00CDE2D3 /* SurveyDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762ED0528807D1A00CDE2D3 /* SurveyDetailViewController.swift */; };
 		A77E3A4F287E7DD300BD3D06 /* DataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */; };
 		A77E3A51287E7E3100BD3D06 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77E3A50287E7E3100BD3D06 /* AccessToken.swift */; };
+		A784CDEE28817F1C00B37EE6 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */; };
+		A784CDF028818A7000B37EE6 /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */; };
 		A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD0C32879725500121199 /* AppDelegate.swift */; };
 		A7BDD0CD2879725700121199 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CC2879725700121199 /* Assets.xcassets */; };
 		A7BDD0D02879725700121199 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7BDD0CE2879725700121199 /* LaunchScreen.storyboard */; };
@@ -101,6 +107,10 @@
 		A7074BB4287DEB8D00658D5B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7074BB5287DEC7800658D5B /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		A751BC1D2881249300BF82BB /* SurveyListViewModelSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListViewModelSpecs.swift; sourceTree = "<group>"; };
+		A751BC1F2881610500BF82BB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A751BC212881620900BF82BB /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		A751BC242881624B00BF82BB /* UserTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTarget.swift; sourceTree = "<group>"; };
+		A751BC262881625D00BF82BB /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
 		A75B5CB3287D63A100C28A1E /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		A75B5CB5287D64A800C28A1E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +135,8 @@
 		A762ED0528807D1A00CDE2D3 /* SurveyDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDetailViewController.swift; sourceTree = "<group>"; };
 		A77E3A4E287E7DD300BD3D06 /* DataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponse.swift; sourceTree = "<group>"; };
 		A77E3A50287E7E3100BD3D06 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		A7BDD0C02879725500121199 /* Survey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BDD0C32879725500121199 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7BDD0CC2879725700121199 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,6 +240,15 @@
 			path = Survey;
 			sourceTree = "<group>";
 		};
+		A751BC232881623B00BF82BB /* UserRepository */ = {
+			isa = PBXGroup;
+			children = (
+				A751BC242881624B00BF82BB /* UserTarget.swift */,
+				A751BC262881625D00BF82BB /* UserRepositoryImpl.swift */,
+			);
+			path = UserRepository;
+			sourceTree = "<group>";
+		};
 		A75B5CBD287D7A5000C28A1E /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +281,15 @@
 				A76153B3288013270046AACF /* DateView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A784CDEC28817D7000B37EE6 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A784CDED28817F1C00B37EE6 /* SideMenuViewController.swift */,
+				A784CDEF28818A7000B37EE6 /* SideMenuViewModel.swift */,
+			);
+			path = SideMenu;
 			sourceTree = "<group>";
 		};
 		A7BDD0B72879725500121199 = {
@@ -339,7 +369,6 @@
 				A7BDD0FE287BD3A900121199 /* ViewModelType.swift */,
 				A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */,
 				A76153B128800FFF0046AACF /* ReusableView.swift */,
-				A76153B5288013FE0046AACF /* DateUtils.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -368,6 +397,7 @@
 		A7BDD0F7287975E600121199 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A76153B5288013FE0046AACF /* DateUtils.swift */,
 				A7BDD126287C8C7600121199 /* JSONParser.swift */,
 				A75B5CB9287D65F200C28A1E /* LibsManager.swift */,
 				A7074BAB287DE01C00658D5B /* Validator.swift */,
@@ -386,6 +416,7 @@
 				A76153B728801B090046AACF /* Survey.swift */,
 				A762ECFD288051BE00CDE2D3 /* SurveyResponse.swift */,
 				A762ED0328805FC800CDE2D3 /* Pagination.swift */,
+				A751BC1F2881610500BF82BB /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -393,6 +424,7 @@
 		A7BDD0F9287975FC00121199 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A784CDEC28817D7000B37EE6 /* SideMenu */,
 				A7BDD115287C34F700121199 /* Survey */,
 				A7BDD114287C34E700121199 /* Login */,
 				A7BDD113287C328500121199 /* Splash */,
@@ -412,10 +444,12 @@
 		A7BDD100287BD58600121199 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				A751BC232881623B00BF82BB /* UserRepository */,
 				A7BDD102287BD5AF00121199 /* SurveyRepository */,
 				A7BDD101287BD59200121199 /* AuthRepository */,
 				A7BDD10D287C2D8D00121199 /* AuthRepository.swift */,
 				A7BDD10F287C306400121199 /* SurveyRepository.swift */,
+				A751BC212881620900BF82BB /* UserRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -815,6 +849,8 @@
 			files = (
 				A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */,
 				A7BDD10A287C006400121199 /* RestApi.swift in Sources */,
+				A751BC272881625D00BF82BB /* UserRepositoryImpl.swift in Sources */,
+				A784CDF028818A7000B37EE6 /* SideMenuViewModel.swift in Sources */,
 				A7BDD117287C372D00121199 /* AuthTarget.swift in Sources */,
 				A77E3A4F287E7DD300BD3D06 /* DataResponse.swift in Sources */,
 				A7BDD10C287C2B9200121199 /* AlamofireRestApi.swift in Sources */,
@@ -836,14 +872,17 @@
 				A7074BB0287DE93300658D5B /* UIViewController+Ext.swift in Sources */,
 				A762ED0428805FC800CDE2D3 /* Pagination.swift in Sources */,
 				A75B5CB4287D63A100C28A1E /* AppAssembly.swift in Sources */,
+				A751BC222881620900BF82BB /* UserRepository.swift in Sources */,
 				A7BDD120287C84D400121199 /* ErrorTracker.swift in Sources */,
 				A7BDD127287C8C7600121199 /* JSONParser.swift in Sources */,
 				A7BDD10E287C2D8D00121199 /* AuthRepository.swift in Sources */,
 				A75B5CCC287DA4FD00C28A1E /* ValidationTextField.swift in Sources */,
 				A75B5CC3287D7AB700C28A1E /* UIImageView+Ext.swift in Sources */,
+				A751BC202881610500BF82BB /* User.swift in Sources */,
 				A7BDD0C42879725500121199 /* AppDelegate.swift in Sources */,
 				A762ED00288053D800CDE2D3 /* SurveyTarget.swift in Sources */,
 				A75B5CBC287D71F000C28A1E /* ServiceAssembly.swift in Sources */,
+				A784CDEE28817F1C00B37EE6 /* SideMenuViewController.swift in Sources */,
 				A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */,
 				A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */,
 				A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */,
@@ -852,6 +891,7 @@
 				A7074BB6287DEC7800658D5B /* String+Localization.swift in Sources */,
 				A75B5CC5287D7B9A00C28A1E /* UIView+Ext.swift in Sources */,
 				A762ED0628807D1A00CDE2D3 /* SurveyDetailViewController.swift in Sources */,
+				A751BC252881624B00BF82BB /* UserTarget.swift in Sources */,
 				A7074BAA287DBA2800658D5B /* Dimensions.swift in Sources */,
 				A76153B228800FFF0046AACF /* ReusableView.swift in Sources */,
 				A7BDD0FD287BBD6300121199 /* ViewController.swift in Sources */,

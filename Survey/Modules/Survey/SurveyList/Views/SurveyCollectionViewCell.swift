@@ -96,7 +96,7 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
     
     func bindData(survey: Survey?) {
         if let urlString = survey?.coverImageUrl, let url = URL(string: urlString) {
-            backgroundImage.kf.setImage(with: url)
+            backgroundImage.kf.setImage(with: url, placeholder: UIImage(asset: .darkGradient))
         } else {
             backgroundImage.image = UIImage(asset: .darkGradient)
         }

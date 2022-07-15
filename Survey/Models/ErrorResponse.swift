@@ -18,15 +18,15 @@ enum ErrorResponse: Int, Error {
     var localizedDescription: String {
         switch self {
         case .badRequest:
-            return "Bad request"
+            return "bad_request".localized
         case .unauthorized:
-            return "Unauthorized"
+            return "unauthorized".localized
         case .forbidden:
-            return "Forbidden"
+            return "forbidden".localized
         case .notFound:
-            return "Not Found"
+            return "not_found".localized
         case .unknown, .invalidJson:
-            return "Technical issue"
+            return "technical_issue".localized
         }
     }
 }

@@ -21,13 +21,20 @@ class SurveyListViewModel: ViewModel, ViewModelType {
         var surveys: Driver<[Survey?]>
         var gotoSurveyDetails: Driver<Survey>
         var canLoadMore: Driver<Bool>
+        var avatarUrl: Driver<URL>
     }
     
     private let surveys = BehaviorRelay<[Survey?]>(value: [nil])
     private let pagination = BehaviorRelay<Pagination?>(value: nil)
     private lazy var surveyRepository = resolver.resolve(SurveyRepository.self)!
-    
+    private lazy var userRepository = resolver.resolve(UserRepository.self)!
+
     func transform(input: Input) -> Output {
+        
+        userRepository
+            .getUserProfile()
+            .subscribe(onSuccess: { _ in })
+            .disposed(by: rx.disposeBag)
         
         input.getSurveyList.drive(onNext: { [weak self] in
             self?.getSurvey(loadMore: false)
@@ -42,6 +49,11 @@ class SurveyListViewModel: ViewModel, ViewModelType {
             canLoadMore: pagination
                 .compactMap { $0 }
                 .map { $0.canLoadMore }
+                .asDriverOnErrorJustComplete(),
+            avatarUrl: userRepository
+                .userObservable
+                .compactMap { $0?.avatarUrl }
+                .compactMap { URL(string: $0) }
                 .asDriverOnErrorJustComplete()
         )
     }

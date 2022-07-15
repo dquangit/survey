@@ -8,16 +8,31 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Kingfisher
+import SideMenu
 
 class SurveyListViewController: ViewController {
     
     private let onRefresh = PublishSubject<Void>()
+    private let onTakeSurvey = PublishSubject<Survey>()
+    private let onLoadMore = PublishSubject<Void>()
     
     private lazy var dateView = DateView()
     
-    private lazy var userImageView = UIImageView(asset: .userPicture)
-    private let onTakeSurvey = PublishSubject<Survey>()
-    private let onLoadMore = PublishSubject<Void>()
+    private lazy var userImageView: UIImageView = {
+        let imageView = UIImageView(asset: .userPicture)
+        imageView.isSkeletonable = true
+        imageView.snp.makeConstraints { make in
+            make.size.equalTo(36)
+        }
+        imageView.layer.cornerRadius = 18
+        imageView.clipsToBounds = true
+        imageView.skeletonCornerRadius = 18
+        imageView.rx.tap().subscribe(onNext: { [weak self] in
+            self?.showSideMenu()
+        }).disposed(by: rx.disposeBag)
+        return imageView
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -81,24 +96,24 @@ class SurveyListViewController: ViewController {
             dateView,
             pageControl
         ])
-        
+        view.isSkeletonable = true
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        dateView.snp.makeConstraints { make in
-            if #available(iOS 11.0, *) {
-                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(28)
-            } else {
-                make.top.equalToSuperview().offset(28)
-            }
-            make.left.equalToSuperview().offset(20)
-            make.right.equalTo(userImageView.snp.left).offset(-20)
-        }
         
         userImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(dateView)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(45)
+            } else {
+                make.top.equalToSuperview().offset(45)
+            }
             make.right.equalToSuperview().offset(-20)
-            make.size.equalTo(36)
+        }
+        
+        dateView.snp.makeConstraints { make in
+            make.centerY.equalTo(userImageView)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalTo(userImageView.snp.left).offset(-20)
         }
         
         pageControl.snp.makeConstraints { make in
@@ -157,7 +172,7 @@ class SurveyListViewController: ViewController {
         }).disposed(by: rx.disposeBag)
         
         let loadMoreData = Driver.combineLatest(
-            output.surveys ,
+            output.surveys,
             output.canLoadMore
         )
         
@@ -175,17 +190,39 @@ class SurveyListViewController: ViewController {
             .bind(to: onLoadMore)
             .disposed(by: rx.disposeBag)
         
+        output.avatarUrl.drive(onNext: { [weak self] url in
+            self?.userImageView.kf.setImage(
+                with: url,
+                placeholder: UIImage(asset: .userPicture)
+            )
+        }).disposed(by: rx.disposeBag)
+        
         isLoading.subscribe(onNext: { [weak self] loading in
             if (loading) {
-                self?.pageControl.showAnimatedGradientSkeleton()
+                self?.view.showAnimatedGradientSkeleton()
                 return
             }
-            self?.pageControl.hideSkeleton()
+            self?.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
         }).disposed(by: rx.disposeBag)
     }
     
     @objc func refresh() {
         onRefresh.onNext(())
+    }
+    
+    private func showSideMenu() {
+        let sideMenuVC = SideMenuViewController(viewModel: SideMenuViewModel(resolver: resolver), resolver: resolver)
+        sideMenuVC.onLogoutSuccess = { [weak self] in
+            self?.backToLogin()
+        }
+        let menu = SideMenuNavigationController(rootViewController: sideMenuVC)
+        menu.presentationStyle = .menuSlideIn
+        self.present(menu, animated: true, completion: nil)
+    }
+    
+    private func backToLogin() {
+        let loginVC = resolver.resolve(LoginViewController.self)!
+        self.navigationController?.setViewControllers([loginVC], animated: true)
     }
     
     override var defaultLoadingAnimation: Bool {
