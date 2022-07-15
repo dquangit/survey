@@ -15,6 +15,7 @@
 		A7074BB0287DE93300658D5B /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074BAF287DE93300658D5B /* UIViewController+Ext.swift */; };
 		A7074BB3287DEAA200658D5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A7074BB2287DEAA200658D5B /* Localizable.strings */; };
 		A7074BB6287DEC7800658D5B /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7074BB5287DEC7800658D5B /* String+Localization.swift */; };
+		A751BC1E2881249300BF82BB /* SurveyListViewModelSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A751BC1D2881249300BF82BB /* SurveyListViewModelSpecs.swift */; };
 		A75B5CB4287D63A100C28A1E /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB3287D63A100C28A1E /* AppAssembly.swift */; };
 		A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB5287D64A800C28A1E /* SplashViewController.swift */; };
 		A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */; };
@@ -99,6 +100,7 @@
 		A7074BB2287DEAA200658D5B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		A7074BB4287DEB8D00658D5B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7074BB5287DEC7800658D5B /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		A751BC1D2881249300BF82BB /* SurveyListViewModelSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListViewModelSpecs.swift; sourceTree = "<group>"; };
 		A75B5CB3287D63A100C28A1E /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		A75B5CB5287D64A800C28A1E /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		A75B5CB7287D64C000C28A1E /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
@@ -216,6 +218,14 @@
 				A7074BB2287DEAA200658D5B /* Localizable.strings */,
 			);
 			path = Localizations;
+			sourceTree = "<group>";
+		};
+		A751BC1C2881247400BF82BB /* Survey */ = {
+			isa = PBXGroup;
+			children = (
+				A751BC1D2881249300BF82BB /* SurveyListViewModelSpecs.swift */,
+			);
+			path = Survey;
 			sourceTree = "<group>";
 		};
 		A75B5CBD287D7A5000C28A1E /* Constants */ = {
@@ -505,6 +515,7 @@
 		A7FB969A287EF212006C232F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A751BC1C2881247400BF82BB /* Survey */,
 				A7FB96A4287F2154006C232F /* Splash */,
 				A7FB969B287EF4CD006C232F /* Login */,
 			);
@@ -771,7 +782,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ $ACTION == \"indexbuild\" ]; then\n  echo \"Not running Cuckoo generator during indexing.\"\n  exit 0 \nfi\n\n# Skip for preview builds\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Not running Cuckoo generator during preview builds.\"\n  exit 0\nfi\n\n# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Repositories/AuthRepository.swift\"\n";
+			shellScript = "if [ $ACTION == \"indexbuild\" ]; then\n  echo \"Not running Cuckoo generator during indexing.\"\n  exit 0 \nfi\n\n# Skip for preview builds\nif [ \"${ENABLE_PREVIEWS}\" = \"YES\" ]; then\n  echo \"Not running Cuckoo generator during preview builds.\"\n  exit 0\nfi\n\n# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${INPUT_DIR}/Repositories/AuthRepository.swift\" \\\n\"${INPUT_DIR}/Repositories/SurveyRepository.swift\"\n";
 		};
 		AC557BCFA2A2291433E1CD38 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -859,6 +870,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7FB96A6287F2168006C232F /* SplashViewModelSpecs.swift in Sources */,
+				A751BC1E2881249300BF82BB /* SurveyListViewModelSpecs.swift in Sources */,
 				A7FB96A0287EFD2F006C232F /* LoginViewModelSpecs.swift in Sources */,
 				A7FB96A3287F0854006C232F /* GeneratedMocks.swift in Sources */,
 			);

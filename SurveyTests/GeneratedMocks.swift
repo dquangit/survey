@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-14 12:56:29 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-15 06:10:33 +0000
 
 //
 //  AuthRepository.swift
@@ -215,6 +215,140 @@ import RxSwift
     
      func logout(token: String) -> Single<Void>  {
         return DefaultValueRegistry.defaultValue(for: (Single<Void>).self)
+    }
+    
+    
+}
+
+
+
+
+
+// MARK: - Mocks generated from file: Survey/Repositories/SurveyRepository.swift at 2022-07-15 06:10:33 +0000
+
+//
+//  SurveyRepository.swift
+//  Survey
+//
+//  Created by Quang Pham on 11/07/2022.
+//
+
+import Cuckoo
+@testable import Survey
+
+import Foundation
+import RxSwift
+
+
+
+
+
+
+ class MockSurveyRepository: SurveyRepository, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = SurveyRepository
+    
+     typealias Stubbing = __StubbingProxy_SurveyRepository
+     typealias Verification = __VerificationProxy_SurveyRepository
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: SurveyRepository?
+
+     func enableDefaultImplementation(_ stub: SurveyRepository) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+
+    
+
+    
+    
+    
+    
+     func getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>> {
+        
+    return cuckoo_manager.call(
+    """
+    getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>
+    """,
+            parameters: (page, size),
+            escapingParameters: (page, size),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.getSurveyList(page: page, size: size))
+        
+    }
+    
+    
+
+     struct __StubbingProxy_SurveyRepository: Cuckoo.StubbingProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+    
+         init(manager: Cuckoo.MockManager) {
+            self.cuckoo_manager = manager
+        }
+        
+        
+        
+        
+        func getSurveyList<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(page: M1, size: M2) -> Cuckoo.ProtocolStubFunction<(Int, Int), Single<DataResponse<[SurveyResponse]>>> where M1.MatchedType == Int, M2.MatchedType == Int {
+            let matchers: [Cuckoo.ParameterMatcher<(Int, Int)>] = [wrap(matchable: page) { $0.0 }, wrap(matchable: size) { $0.1 }]
+            return .init(stub: cuckoo_manager.createStub(for: MockSurveyRepository.self, method:
+    """
+    getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>
+    """, parameterMatchers: matchers))
+        }
+        
+        
+    }
+
+     struct __VerificationProxy_SurveyRepository: Cuckoo.VerificationProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+        private let callMatcher: Cuckoo.CallMatcher
+        private let sourceLocation: Cuckoo.SourceLocation
+    
+         init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+            self.cuckoo_manager = manager
+            self.callMatcher = callMatcher
+            self.sourceLocation = sourceLocation
+        }
+    
+        
+    
+        
+        
+        
+        @discardableResult
+        func getSurveyList<M1: Cuckoo.Matchable, M2: Cuckoo.Matchable>(page: M1, size: M2) -> Cuckoo.__DoNotUse<(Int, Int), Single<DataResponse<[SurveyResponse]>>> where M1.MatchedType == Int, M2.MatchedType == Int {
+            let matchers: [Cuckoo.ParameterMatcher<(Int, Int)>] = [wrap(matchable: page) { $0.0 }, wrap(matchable: size) { $0.1 }]
+            return cuckoo_manager.verify(
+    """
+    getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
+    }
+}
+
+ class SurveyRepositoryStub: SurveyRepository {
+    
+
+    
+
+    
+    
+    
+    
+     func getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>  {
+        return DefaultValueRegistry.defaultValue(for: (Single<DataResponse<[SurveyResponse]>>).self)
     }
     
     

@@ -28,7 +28,7 @@ class LoginViewModelSpecs: QuickSpec {
         var loginSuccess: Bool?
         var loginError: Error?
         
-        describe("LoginViewModel") {
+        describe("LoginViewModelSpecs") {
             
             beforeEach {
                 email = BehaviorSubject<String>(value: "")

@@ -11,7 +11,3 @@ class Dimensions {
     static let buttonHeight = 56
     static let textFieldHeight = 56
 }
-
-class Capacity {
-    static let pullToRefreshOffset: Double = -80
-}

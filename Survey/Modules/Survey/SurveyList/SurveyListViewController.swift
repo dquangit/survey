@@ -34,6 +34,18 @@ class SurveyListViewController: ViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.isPagingEnabled = true
+        collectionView.rx
+            .didEndDecelerating.withLatestFrom(collectionView.rx.contentOffset)
+            .map { point in
+                Int(point.x/UIScreen.main.bounds.width)
+            }.bind(to: pageControl.rx.currentPage)
+            .disposed(by: rx.disposeBag)
+        collectionView.rx.didScroll.subscribe(onNext: { [weak self] in
+            guard let self = self else { return }
+            if self.collectionView.contentOffset.x < Constants.pullToRefreshOffset {
+                self.refresh()
+            }
+        }).disposed(by: rx.disposeBag)
         return collectionView
     }()
     
@@ -44,6 +56,19 @@ class SurveyListViewController: ViewController {
         pageControl.hidesForSinglePage = true
         pageControl.isSkeletonable = true
         pageControl.skeletonCornerRadius = 8
+        pageControl.rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.collectionView.scrollToItem(
+                    at: IndexPath(
+                        row: self.pageControl.currentPage,
+                        section: 0
+                    ),
+                    at: .left,
+                    animated: true
+                )
+            })
+            .disposed(by: rx.disposeBag)
         return pageControl
     }()
     
@@ -95,7 +120,7 @@ class SurveyListViewController: ViewController {
     override func bindViewModel() {
         super.bindViewModel()
         guard let viewModel = viewModel as? SurveyListViewModel else { return }
-    
+        
         let input = SurveyListViewModel.Input(
             getSurveyList: onRefresh.asDriverOnErrorJustComplete(),
             loadMore: onLoadMore.asDriverOnErrorJustComplete(),
@@ -131,14 +156,6 @@ class SurveyListViewController: ViewController {
             self.navigationController?.pushViewController(surveyDetailVC, animated: true)
         }).disposed(by: rx.disposeBag)
         
-        collectionView
-            .rx
-            .didEndDecelerating.withLatestFrom(collectionView.rx.contentOffset)
-            .map { point in
-                Int(point.x/UIScreen.main.bounds.width)
-            }.bind(to: pageControl.rx.currentPage)
-            .disposed(by: rx.disposeBag)
-        
         let loadMoreData = Driver.combineLatest(
             output.surveys ,
             output.canLoadMore
@@ -156,29 +173,6 @@ class SurveyListViewController: ViewController {
             .filter { $0 }
             .mapToVoid()
             .bind(to: onLoadMore)
-            .disposed(by: rx.disposeBag)
-        
-        collectionView.rx.didScroll.subscribe(onNext: { [weak self] in
-            guard let self = self else { return }
-            if self.collectionView.contentOffset.x < Capacity.pullToRefreshOffset {
-                self.refresh()
-            }
-        }).disposed(by: rx.disposeBag)
-        
-        pageControl.rx.controlEvent(.valueChanged)
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else {
-                    return
-                }
-                self.collectionView.scrollToItem(
-                    at: IndexPath(
-                        row: self.pageControl.currentPage,
-                        section: 0
-                    ),
-                    at: .centeredHorizontally,
-                    animated: true
-                )
-            })
             .disposed(by: rx.disposeBag)
         
         isLoading.subscribe(onNext: { [weak self] loading in
