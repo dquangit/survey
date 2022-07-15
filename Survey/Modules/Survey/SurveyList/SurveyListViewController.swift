@@ -127,9 +127,11 @@ class SurveyListViewController: ViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        refresh()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(200), execute: {
+            self.refresh()
+        })
     }
     
     override func bindViewModel() {
