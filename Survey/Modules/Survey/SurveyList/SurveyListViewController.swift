@@ -50,7 +50,8 @@ class SurveyListViewController: ViewController {
         collectionView.contentInset = .zero
         collectionView.isPagingEnabled = true
         collectionView.rx
-            .didEndDecelerating.withLatestFrom(collectionView.rx.contentOffset)
+            .didScroll
+            .withLatestFrom(collectionView.rx.contentOffset)
             .map { point in
                 Int(point.x/UIScreen.main.bounds.width)
             }.bind(to: pageControl.rx.currentPage)
