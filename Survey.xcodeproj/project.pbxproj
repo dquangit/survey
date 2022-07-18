@@ -67,6 +67,7 @@
 		A7BDD122287C856B00121199 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD121287C856B00121199 /* Observable+Operators.swift */; };
 		A7BDD125287C879400121199 /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD124287C879400121199 /* AuthRepositoryImpl.swift */; };
 		A7BDD127287C8C7600121199 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BDD126287C8C7600121199 /* JSONParser.swift */; };
+		A7E0F29D288596E500008730 /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E0F29C288596E500008730 /* UIColor+Ext.swift */; };
 		A7FB9693287EB9F4006C232F /* AccessTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB9692287EB9F4006C232F /* AccessTokenProvider.swift */; };
 		A7FB9697287ED138006C232F /* SurveyListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB9696287ED138006C232F /* SurveyListViewController.swift */; };
 		A7FB9699287ED14F006C232F /* SurveyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FB9698287ED14F006C232F /* SurveyListViewModel.swift */; };
@@ -161,6 +162,7 @@
 		A7BDD121287C856B00121199 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		A7BDD124287C879400121199 /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
 		A7BDD126287C8C7600121199 /* JSONParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
+		A7E0F29C288596E500008730 /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		A7FB9692287EB9F4006C232F /* AccessTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenProvider.swift; sourceTree = "<group>"; };
 		A7FB9696287ED138006C232F /* SurveyListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListViewController.swift; sourceTree = "<group>"; };
 		A7FB9698287ED14F006C232F /* SurveyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyListViewModel.swift; sourceTree = "<group>"; };
@@ -390,6 +392,7 @@
 				A75B5CC4287D7B9A00C28A1E /* UIView+Ext.swift */,
 				A7074BAF287DE93300658D5B /* UIViewController+Ext.swift */,
 				A7074BB5287DEC7800658D5B /* String+Localization.swift */,
+				A7E0F29C288596E500008730 /* UIColor+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				A7BDD106287BE20400121199 /* TargetType.swift in Sources */,
 				A7FB9693287EB9F4006C232F /* AccessTokenProvider.swift in Sources */,
 				A76153B828801B090046AACF /* Survey.swift in Sources */,
+				A7E0F29D288596E500008730 /* UIColor+Ext.swift in Sources */,
 				A75B5CBF287D7A8700C28A1E /* ImageAsset.swift in Sources */,
 				A7074BB0287DE93300658D5B /* UIViewController+Ext.swift in Sources */,
 				A762ED0428805FC800CDE2D3 /* Pagination.swift in Sources */,
