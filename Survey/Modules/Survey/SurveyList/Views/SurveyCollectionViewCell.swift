@@ -58,20 +58,6 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         return button
     }()
     
-    private lazy var gradientLayer: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor.black.cgColor,
-            UIColor.black.withAlphaComponent(0.01).cgColor
-           
-        ]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.locations = [0, 1]
-        gradientLayer.frame = bounds
-        return gradientLayer
-    }()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()
@@ -102,7 +88,7 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
     
         titleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(20)
-            make.top.equalTo(contentView.snp.bottom).inset(150)
+            make.bottom.equalToSuperview().inset(112)
         }
         
         descriptionLabel.snp.makeConstraints { make in
@@ -120,7 +106,7 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
     }
     
     func bindData(survey: Survey?) {
-        if let urlString = survey?.highResolutionCoverImageUrl, let url = URL(string: urlString) {
+        if let urlString = survey?.coverImageUrl, let url = URL(string: urlString) {
             backgroundImage.kf.setImage(with: url, placeholder: UIImage(asset: .darkGradient))
         } else {
             backgroundImage.image = UIImage(asset: .darkGradient)
@@ -137,6 +123,9 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        overlayView.layer.insertSublayer(gradientLayer, at: 0)
+        overlayView.setGradientBackground(
+            colorTop: .black.withAlphaComponent(0.01),
+            colorBottom: .black
+        )
     }
 }
