@@ -14,6 +14,8 @@ class DateView: UIView {
         label.font = .boldSystemFont(ofSize: 14)
         label.textColor = .white
         label.isSkeletonable = true
+        label.skeletonTextLineHeight = .fixed(20)
+        label.linesCornerRadius = 8
         label.text = DateUtils.dateInWeek(Date())?.uppercased()
         return label
     }()
@@ -24,7 +26,8 @@ class DateView: UIView {
         label.textColor = .white
         label.text = "today".localized
         label.isSkeletonable = true
-        label.skeletonTextLineHeight = .fixed(30)
+        label.skeletonTextLineHeight = .fixed(20)
+        label.linesCornerRadius = 8
         return label
     }()
     

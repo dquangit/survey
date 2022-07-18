@@ -31,10 +31,10 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         label.font = .boldSystemFont(ofSize: 28)
         label.textColor = .white
         label.numberOfLines = 2
-        label.isSkeletonable = true
+        label.enableSkeletonAnimation(radius: 8)
+        label.linesCornerRadius = 8
         label.skeletonTextNumberOfLines = 2
-        label.skeletonTextLineHeight = .fixed(25)
-        label.skeletonCornerRadius = 8
+        label.skeletonTextLineHeight = .fixed(20)
         return label
     }()
     
@@ -43,9 +43,10 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         label.font = .systemFont(ofSize: 17)
         label.textColor = .white
         label.numberOfLines = 2
-        label.isSkeletonable = true
+        label.enableSkeletonAnimation(radius: 8)
+        label.linesCornerRadius = 8
         label.skeletonTextNumberOfLines = 2
-        label.skeletonCornerRadius = 8
+        label.skeletonTextLineHeight = .fixed(20)
         return label
     }()
     
@@ -116,7 +117,7 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
             make.bottom.equalTo(descriptionLabel)
             make.size.equalTo(56)
         }
-        contentView.isSkeletonable = true
+        contentView.enableSkeletonAnimation()
     }
     
     func bindData(survey: Survey?) {
@@ -127,10 +128,11 @@ class SurveyCollectionViewCell: UICollectionViewCell, ReusableCell {
         }
         takeSurveyButton.isHidden = survey == nil
         guard let survey = survey else {
-            contentView.showAnimatedGradientSkeleton()
+            contentView.startSkeleton()
+            titleLabel.startSkeleton()
             return
         }
-        contentView.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
+        contentView.stopSkeleton()
         titleLabel.text = survey.title
         descriptionLabel.text = survey.description
     }
