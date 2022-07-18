@@ -16,9 +16,11 @@ class SurveyListViewController: ViewController {
     private let onRefresh = PublishSubject<Void>()
     private let onTakeSurvey = PublishSubject<Survey>()
     private let onLoadMore = PublishSubject<Void>()
-    
+    private let onPageChanged = BehaviorSubject<Int>(value: 0)
+    private var barStyle: UIStatusBarStyle?
+
     private lazy var dateView = DateView()
-    
+
     private lazy var userImageView: UIImageView = {
         let imageView = UIImageView(asset: .userPicture)
         imageView.isSkeletonable = true
@@ -72,6 +74,10 @@ class SurveyListViewController: ViewController {
         pageControl.hidesForSinglePage = true
         pageControl.isSkeletonable = true
         pageControl.skeletonCornerRadius = 8
+        if #available(iOS 14.0, *) {
+          pageControl.backgroundStyle = .minimal
+          pageControl.allowsContinuousInteraction = false
+        }
         pageControl.rx.controlEvent(.valueChanged)
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
@@ -98,6 +104,7 @@ class SurveyListViewController: ViewController {
             pageControl
         ])
         view.isSkeletonable = true
+        barStyle = preferredStatusBarStyle
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -118,8 +125,8 @@ class SurveyListViewController: ViewController {
         }
         
         pageControl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-180)
+            make.left.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-170)
         }
     }
     
@@ -207,6 +214,22 @@ class SurveyListViewController: ViewController {
             }
             self?.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
         }).disposed(by: rx.disposeBag)
+            
+        Observable.combineLatest(
+            output.surveys.asObservable(),
+            Observable.merge(
+                Observable.just(()),
+                collectionView.rx.didEndScrollingAnimation.asObservable(),
+                collectionView.rx.didEndDecelerating.asObservable()
+            )
+        )
+        .subscribe(
+            onNext: { [weak self] (surveys, _) in
+                guard let self = self else { return }
+                let page = Int(self.collectionView.contentOffset.x/UIScreen.main.bounds.width)
+                guard page < surveys.count, let url = surveys[page]?.highResolutionCoverImageUrl else { return }
+                self.updateStatusBarByImage(url)
+            }).disposed(by: rx.disposeBag)
     }
     
     @objc func refresh() {
@@ -230,5 +253,40 @@ class SurveyListViewController: ViewController {
     
     override var defaultLoadingAnimation: Bool {
         return false
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return barStyle ?? super.preferredStatusBarStyle
+    }
+    
+    private func updateStatusBarByImage(_ urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        KingfisherManager.shared.retrieveImage(with: url) { [weak self] response in
+            guard let self = self else { return }
+            switch response {
+            case .success:
+                let image = self.view.asImage(
+                    bounds: CGRect(
+                        x: 0,
+                        y: 0,
+                        width: self.collectionView.frame.width,
+                        height:  UIApplication.shared.statusBarFrame.height
+                    )
+                )
+                let islight = image.isLight ?? false
+                self.updateStatusBar(light: !islight)
+            default:
+                self.updateStatusBar(light: false)
+            }
+        }
+    }
+    
+    private func updateStatusBar(light: Bool) {
+        if #available(iOS 13.0, *) {
+            self.barStyle = light ? .lightContent : .darkContent
+        } else {
+            self.barStyle = light ? .lightContent : .default
+        }
+        self.setNeedsStatusBarAppearanceUpdate()
     }
 }

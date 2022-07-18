@@ -11,4 +11,11 @@ struct Survey: Codable {
     var title: String?
     var description: String?
     var coverImageUrl: String?
+    
+    var highResolutionCoverImageUrl: String? {
+        guard let coverImageUrl = coverImageUrl else {
+            return nil
+        }
+        return "\(coverImageUrl)l"
+    }
 }
