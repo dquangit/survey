@@ -71,9 +71,7 @@ class SurveyListViewController: ViewController {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = .white.withAlphaComponent(0.5)
         pageControl.currentPageIndicatorTintColor = .white
-        pageControl.hidesForSinglePage = true
-        pageControl.isSkeletonable = true
-        pageControl.skeletonCornerRadius = 8
+        pageControl.enableSkeletonAnimation(radius: 8)
         if #available(iOS 14.0, *) {
           pageControl.backgroundStyle = .minimal
           pageControl.allowsContinuousInteraction = false
@@ -127,6 +125,8 @@ class SurveyListViewController: ViewController {
         pageControl.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.bottom.equalToSuperview().offset(-170)
+            make.width.equalTo(100)
+            make.height.equalTo(20)
         }
     }
     
@@ -209,10 +209,10 @@ class SurveyListViewController: ViewController {
         
         isLoading.subscribe(onNext: { [weak self] loading in
             if (loading) {
-                self?.view.showAnimatedGradientSkeleton()
+                self?.view.startSkeleton()
                 return
             }
-            self?.view.hideSkeleton(reloadDataAfter: false, transition: .crossDissolve(0.25))
+            self?.view.stopSkeleton()
         }).disposed(by: rx.disposeBag)
             
         Observable.combineLatest(
