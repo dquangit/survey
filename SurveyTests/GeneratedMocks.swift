@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-15 08:23:08 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/AuthRepository.swift at 2022-07-18 07:47:20 +0000
 
 //
 //  AuthRepository.swift
@@ -224,7 +224,7 @@ import RxSwift
 
 
 
-// MARK: - Mocks generated from file: Survey/Repositories/SurveyRepository.swift at 2022-07-15 08:23:08 +0000
+// MARK: - Mocks generated from file: Survey/Repositories/SurveyRepository.swift at 2022-07-18 07:47:20 +0000
 
 //
 //  SurveyRepository.swift
@@ -349,6 +349,232 @@ import RxSwift
     
      func getSurveyList(page: Int, size: Int) -> Single<DataResponse<[SurveyResponse]>>  {
         return DefaultValueRegistry.defaultValue(for: (Single<DataResponse<[SurveyResponse]>>).self)
+    }
+    
+    
+}
+
+
+
+
+
+// MARK: - Mocks generated from file: Survey/Repositories/UserRepository.swift at 2022-07-18 07:47:20 +0000
+
+//
+//  UserRepository.swift
+//  Survey
+//
+//  Created by Quang Pham on 15/07/2022.
+//
+
+import Cuckoo
+@testable import Survey
+
+import Foundation
+import RxSwift
+
+
+
+
+
+
+ class MockUserRepository: UserRepository, Cuckoo.ProtocolMock {
+    
+     typealias MocksType = UserRepository
+    
+     typealias Stubbing = __StubbingProxy_UserRepository
+     typealias Verification = __VerificationProxy_UserRepository
+
+     let cuckoo_manager = Cuckoo.MockManager.preconfiguredManager ?? Cuckoo.MockManager(hasParent: false)
+
+    
+    private var __defaultImplStub: UserRepository?
+
+     func enableDefaultImplementation(_ stub: UserRepository) {
+        __defaultImplStub = stub
+        cuckoo_manager.enableDefaultStubImplementation()
+    }
+    
+
+    
+    
+    
+    
+     var userObservable: Observable<User?> {
+        get {
+            return cuckoo_manager.getter("userObservable",
+                superclassCall:
+                    
+                    Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                    ,
+                defaultCall: __defaultImplStub!.userObservable)
+        }
+        
+    }
+    
+    
+
+    
+
+    
+    
+    
+    
+     func getUserProfile() -> Single<User?> {
+        
+    return cuckoo_manager.call(
+    """
+    getUserProfile() -> Single<User?>
+    """,
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.getUserProfile())
+        
+    }
+    
+    
+    
+    
+    
+     func clearCurrentUser()  {
+        
+    return cuckoo_manager.call(
+    """
+    clearCurrentUser()
+    """,
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                Cuckoo.MockManager.crashOnProtocolSuperclassCall()
+                ,
+            defaultCall: __defaultImplStub!.clearCurrentUser())
+        
+    }
+    
+    
+
+     struct __StubbingProxy_UserRepository: Cuckoo.StubbingProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+    
+         init(manager: Cuckoo.MockManager) {
+            self.cuckoo_manager = manager
+        }
+        
+        
+        
+        var userObservable: Cuckoo.ProtocolToBeStubbedReadOnlyProperty<MockUserRepository, Observable<User?>> {
+            return .init(manager: cuckoo_manager, name: "userObservable")
+        }
+        
+        
+        
+        
+        
+        func getUserProfile() -> Cuckoo.ProtocolStubFunction<(), Single<User?>> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return .init(stub: cuckoo_manager.createStub(for: MockUserRepository.self, method:
+    """
+    getUserProfile() -> Single<User?>
+    """, parameterMatchers: matchers))
+        }
+        
+        
+        
+        
+        func clearCurrentUser() -> Cuckoo.ProtocolStubNoReturnFunction<()> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return .init(stub: cuckoo_manager.createStub(for: MockUserRepository.self, method:
+    """
+    clearCurrentUser()
+    """, parameterMatchers: matchers))
+        }
+        
+        
+    }
+
+     struct __VerificationProxy_UserRepository: Cuckoo.VerificationProxy {
+        private let cuckoo_manager: Cuckoo.MockManager
+        private let callMatcher: Cuckoo.CallMatcher
+        private let sourceLocation: Cuckoo.SourceLocation
+    
+         init(manager: Cuckoo.MockManager, callMatcher: Cuckoo.CallMatcher, sourceLocation: Cuckoo.SourceLocation) {
+            self.cuckoo_manager = manager
+            self.callMatcher = callMatcher
+            self.sourceLocation = sourceLocation
+        }
+    
+        
+        
+        
+        var userObservable: Cuckoo.VerifyReadOnlyProperty<Observable<User?>> {
+            return .init(manager: cuckoo_manager, name: "userObservable", callMatcher: callMatcher, sourceLocation: sourceLocation)
+        }
+        
+        
+    
+        
+        
+        
+        @discardableResult
+        func getUserProfile() -> Cuckoo.__DoNotUse<(), Single<User?>> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return cuckoo_manager.verify(
+    """
+    getUserProfile() -> Single<User?>
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
+        
+        
+        @discardableResult
+        func clearCurrentUser() -> Cuckoo.__DoNotUse<(), Void> {
+            let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+            return cuckoo_manager.verify(
+    """
+    clearCurrentUser()
+    """, callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+        }
+        
+        
+    }
+}
+
+ class UserRepositoryStub: UserRepository {
+    
+    
+    
+    
+     var userObservable: Observable<User?> {
+        get {
+            return DefaultValueRegistry.defaultValue(for: (Observable<User?>).self)
+        }
+        
+    }
+    
+    
+
+    
+
+    
+    
+    
+    
+     func getUserProfile() -> Single<User?>  {
+        return DefaultValueRegistry.defaultValue(for: (Single<User?>).self)
+    }
+    
+    
+    
+    
+    
+     func clearCurrentUser()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
     

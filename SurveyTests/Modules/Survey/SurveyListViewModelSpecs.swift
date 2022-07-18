@@ -90,6 +90,7 @@ class SurveyListViewModelSpecs: QuickSpec {
     
     private func setupContainer() -> Container {
         let mockSurveyRepository = MockSurveyRepository()
+        let mockUserRepository = MockUserRepository()
         stub(mockSurveyRepository) { stub in
 
             when(stub.getSurveyList(page: 1, size: Pagination.defaultPageSize))
@@ -102,9 +103,18 @@ class SurveyListViewModelSpecs: QuickSpec {
                 .thenReturn(Single.just(DataResponse<[SurveyResponse]>()))
         }
         
+        stub(mockUserRepository) { stub in
+            let mockUser = User()
+            when(stub.getUserProfile()).thenReturn(Single.just(mockUser))
+            when(stub.userObservable.get).thenReturn(Observable.just(mockUser))
+        }
+        
         let container = Container()
         container.register(SurveyRepository.self) { r in
             mockSurveyRepository
+        }
+        container.register(UserRepository.self) { r in
+            mockUserRepository
         }
         return container
     }
