@@ -18,7 +18,6 @@ class SurveyListViewController: ViewController {
     private let onLoadMore = PublishSubject<Void>()
     private let onPageChanged = BehaviorSubject<Int>(value: 0)
     private var barStyle: UIStatusBarStyle?
-    private let refreshControl = UIRefreshControl()
     private var defaultLoading = false
 
     private lazy var dateView = DateView()
@@ -53,7 +52,6 @@ class SurveyListViewController: ViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.isPagingEnabled = true
-        collectionView.addSubview(refreshControl)
         collectionView.rx
             .didScroll
             .withLatestFrom(collectionView.rx.contentOffset)
