@@ -59,11 +59,10 @@ class SurveyListViewModelSpecs: QuickSpec {
 
             context("get list surveys") {
                 
-                it ("get first page - expected data, can load more and placeholder item") {
+                it ("get first page - expected data, can load more") {
                     getSurveyList.onNext(())
-                    expect(surveys.count).to(equal(Pagination.defaultPageSize + 1))
+                    expect(surveys.count).to(equal(Pagination.defaultPageSize))
                     expect(canLoadMore).to(beTrue())
-                    expect(surveys[surveys.count - 1]).to(beNil())
                 }
                 
                 it ("do pagination to the last page - expected data, can not load more and dont have placeholder item") {

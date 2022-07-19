@@ -18,13 +18,13 @@ class SurveyListViewModel: ViewModel, ViewModelType {
     }
     
     struct Output {
-        var surveys: Driver<[Survey?]>
+        var surveys: Driver<[Survey]>
         var gotoSurveyDetails: Driver<Survey>
         var canLoadMore: Driver<Bool>
         var avatarUrl: Driver<URL>
     }
     
-    private let surveys = BehaviorRelay<[Survey?]>(value: [nil])
+    private let surveys = BehaviorRelay<[Survey]>(value: [])
     private let pagination = BehaviorRelay<Pagination?>(value: nil)
     private lazy var surveyRepository = resolver.resolve(SurveyRepository.self)!
     private lazy var userRepository = resolver.resolve(UserRepository.self)!
@@ -61,7 +61,6 @@ class SurveyListViewModel: ViewModel, ViewModelType {
     
     private func getSurvey(loadMore: Bool) {
         if !loadMore {
-            self.surveys.accept([nil])
             self.pagination.accept(nil)
         }
         let page = (pagination.value?.page ?? 0) + 1
@@ -71,11 +70,8 @@ class SurveyListViewModel: ViewModel, ViewModelType {
             .trackError(error)
             .subscribe(onNext: { [weak self] response in
                 guard let self = self else { return }
-                var list = self.surveys.value.filter { $0 != nil }
-                list.append(contentsOf: response.data?.map { $0.attributes } ?? [])
-                if response.meta?.canLoadMore == true {
-                    list.append(nil)
-                }
+                let responseSurveys = response.data?.compactMap { $0.attributes } ?? []
+                let list = loadMore ? self.surveys.value + responseSurveys : responseSurveys
                 self.surveys.accept(list)
                 self.pagination.accept(response.meta)
         }).disposed(by: rx.disposeBag)
