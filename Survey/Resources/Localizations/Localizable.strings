@@ -12,11 +12,13 @@
 "invalid_email" = "Invalid email";
 "password_must_not_be_empty" = "Password must not be empty";
 "error" = "Error";
-"login_failed" = "Login failed";
+"login_failed" = "Login Failed";
+"invalid_email_or_password" = "You have entered an invalid email or password";
 "today" = "Today";
 "logout" = "Logout";
 "bad_request" = "Bad request";
-"unauthorized" = "Unauthorized";
+"unauthorized" = "Your session has expired. Please log in again";
 "forbidden" = "Forbidden";
 "not_found" = "Not Found";
-"technical_issue" = "Technical issue";
+"technical_issue" = "Something went wrong, please try again later";
+"no_internet_connection" = "Could not connect to server. Please check your network connection and try again";

@@ -12,6 +12,7 @@ enum ErrorResponse: Int, Error {
     case unauthorized = 401
     case forbidden = 403
     case notFound = 404
+    case noInternetConnection
     case unknown
     case invalidJson
 
@@ -27,6 +28,8 @@ enum ErrorResponse: Int, Error {
             return "not_found".localized
         case .unknown, .invalidJson:
             return "technical_issue".localized
+        case .noInternetConnection:
+            return "no_internet_connection".localized
         }
     }
 }

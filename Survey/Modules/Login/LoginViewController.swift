@@ -120,4 +120,16 @@ class LoginViewController: ViewController {
             )
         }).disposed(by: rx.disposeBag)
     }
+    
+    override func onError(error: Error) {
+        guard let error = error as? ErrorResponse else {
+            return super.onError(error: error)
+        }
+        switch error {
+        case .badRequest:
+            showAlert(title: "login_failed".localized, message: "invalid_email_or_password".localized)
+        default:
+            return super.onError(error: error)
+        }
+    }
 }

@@ -36,7 +36,7 @@ class AlamofireRestApi: RestApi {
                 .subscribe(
                     onSuccess: { headers in
                         Alamofire.request(
-                            URL(string:  target.baseUrl)!.appendingPathComponent(target.path),
+                            URL(string: target.baseUrl)!.appendingPathComponent(target.path),
                             method: target.method,
                             parameters: target.parameters,
                             encoding: target.parameterEncoding,
@@ -47,7 +47,12 @@ class AlamofireRestApi: RestApi {
                                 case .success(let data):
                                     self.debugRequest(target: target, data: data)
                                     single(.success(data))
-                                case .failure:
+                                case .failure(let error):
+                                    if let error = error as? URLError, error.code == .notConnectedToInternet {
+                                        self.debugRequest(target: target, error: ErrorResponse.noInternetConnection)
+                                        single(.failure(ErrorResponse.noInternetConnection))
+                                        return
+                                    }
                                     if let statusCode = response.response?.statusCode,
                                        let errorResponse = ErrorResponse(rawValue: statusCode) {
                                         self.debugRequest(target: target, error: errorResponse)

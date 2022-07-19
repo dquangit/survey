@@ -54,21 +54,12 @@ class LoginViewModel: ViewModel, ViewModelType {
         resolver.resolve(AuthRepository.self)!
             .loginByEmail(email: email, password: password)
             .trackActivity(loading)
+            .trackError(error)
             .subscribe(
                 onNext: { [weak self] response in
                     guard let self = self else { return }
                     self.resolver.resolve(AccessTokenProvider.self)?.updateToken(token: response.attributes)
                     self.tokenSaved.onNext(())
-                },
-                onError: { [weak self] error in
-                    guard let self = self else { return }
-                    if let error = error as? ErrorResponse,
-                       error == ErrorResponse.badRequest {
-                        self.error.onError(
-                            AppError(message: "login_failed".localized)
-                        )
-                    }
-                    self.error.onError(error)
                 }
             )
             .disposed(by: rx.disposeBag)
