@@ -18,6 +18,8 @@ class SurveyListViewController: ViewController {
     private let onLoadMore = PublishSubject<Void>()
     private let onPageChanged = BehaviorSubject<Int>(value: 0)
     private var barStyle: UIStatusBarStyle?
+    private let refreshControl = UIRefreshControl()
+    private var defaultLoading = false
 
     private lazy var dateView = DateView()
 
@@ -35,7 +37,7 @@ class SurveyListViewController: ViewController {
         }).disposed(by: rx.disposeBag)
         return imageView
     }()
-    
+        
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -51,6 +53,7 @@ class SurveyListViewController: ViewController {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.contentInset = .zero
         collectionView.isPagingEnabled = true
+        collectionView.addSubview(refreshControl)
         collectionView.rx
             .didScroll
             .withLatestFrom(collectionView.rx.contentOffset)
@@ -58,12 +61,6 @@ class SurveyListViewController: ViewController {
                 Int(point.x/UIScreen.main.bounds.width)
             }.bind(to: pageControl.rx.currentPage)
             .disposed(by: rx.disposeBag)
-        collectionView.rx.didScroll.subscribe(onNext: { [weak self] in
-            guard let self = self else { return }
-            if self.collectionView.contentOffset.x < Constants.pullToRefreshOffset {
-                self.refresh()
-            }
-        }).disposed(by: rx.disposeBag)
         return collectionView
     }()
     
@@ -138,6 +135,7 @@ class SurveyListViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + .microseconds(200), execute: {
+            self.view.startSkeleton()
             self.refresh()
         })
     }
@@ -154,7 +152,14 @@ class SurveyListViewController: ViewController {
         
         let output = viewModel.transform(input: input)
         
-        output.surveys.drive(
+        let surveys = Driver.merge(
+            [
+                Driver<[Survey?]>.just([nil]),
+                output.surveys.skip(1).map { surveys -> [Survey?] in surveys }
+            ]
+        )
+        
+        surveys.drive(
             collectionView.rx.items(
                 cellIdentifier: SurveyCollectionViewCell.identifier,
                 cellType: SurveyCollectionViewCell.self
@@ -169,7 +174,7 @@ class SurveyListViewController: ViewController {
             }.disposed(by: rx.disposeBag)
         
         output.surveys
-            .map{ $0.count }
+            .map { $0.count }
             .drive(pageControl.rx.numberOfPages)
             .disposed(by: rx.disposeBag)
         
@@ -207,12 +212,11 @@ class SurveyListViewController: ViewController {
             )
         }).disposed(by: rx.disposeBag)
         
-        isLoading.subscribe(onNext: { [weak self] loading in
-            if (loading) {
-                self?.view.startSkeleton()
-                return
+        isLoading.skip(1).subscribe(onNext: { [weak self] loading in
+            self?.defaultLoading = true
+            if (!loading) {
+                self?.view.stopSkeleton()
             }
-            self?.view.stopSkeleton()
         }).disposed(by: rx.disposeBag)
             
         Observable.combineLatest(
@@ -227,7 +231,7 @@ class SurveyListViewController: ViewController {
             onNext: { [weak self] (surveys, _) in
                 guard let self = self else { return }
                 let page = Int(self.collectionView.contentOffset.x/UIScreen.main.bounds.width)
-                guard page < surveys.count, let url = surveys[page]?.highResolutionCoverImageUrl else { return }
+                guard page < surveys.count, let url = surveys[page].highResolutionCoverImageUrl else { return }
                 self.updateStatusBarByImage(url)
             }).disposed(by: rx.disposeBag)
     }
@@ -252,7 +256,7 @@ class SurveyListViewController: ViewController {
     }
     
     override var defaultLoadingAnimation: Bool {
-        return false
+        return defaultLoading
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

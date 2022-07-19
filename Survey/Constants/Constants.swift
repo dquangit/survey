@@ -12,5 +12,4 @@ class Constants {
     static let clientId = "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE"
     static let clientSecret = "lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU"
     static let accessToken = "accessToken"
-    static let pullToRefreshOffset: Double = -80
 }
