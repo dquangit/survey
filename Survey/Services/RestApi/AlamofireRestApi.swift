@@ -13,9 +13,14 @@ import Swinject
 class AlamofireRestApi: RestApi {
     
     private let resolver: Resolver
+    private let adapter: AuthRequestAdapter
     
     init(resolver: Resolver) {
         self.resolver = resolver
+        self.adapter = AuthRequestAdapter(resolver: resolver)
+        let sessionManager = Alamofire.SessionManager.default
+        sessionManager.adapter = adapter
+        sessionManager.retrier = adapter
     }
     
     func request<T: Decodable>(_ target: TargetType, path: String?) -> Single<T> {
@@ -76,26 +81,16 @@ class AlamofireRestApi: RestApi {
             .accessToken else {
             return Single.just(target.headers)
         }
-        guard accessToken.isExpired else {
-            return Single.just(target
-                .headers
-                .merging(
-                    ["Authorization": accessToken.authorization ?? ""],
-                    uniquingKeysWith: { (_, new) in new }
-                )
+        return Single.just(target
+            .headers
+            .merging(
+                ["Authorization": accessToken.authorization ?? ""],
+                uniquingKeysWith: { (_, new) in new }
             )
-        }
-        return refreshToken().map { token in
-            return target
-                .headers
-                .merging(
-                    ["Authorization": token?.authorization ?? ""],
-                    uniquingKeysWith: { (_, new) in new }
-                )
-        }
+        )
     }
     
-    private func refreshToken() -> Single<AccessToken?> {
+    func refreshToken() -> Single<AccessToken?> {
         guard let tokenProvider = self.resolver.resolve(AccessTokenProvider.self),
               let refreshToken = tokenProvider.accessToken?.refreshToken else {
             return Single.just(nil)
@@ -106,17 +101,7 @@ class AlamofireRestApi: RestApi {
             ),
             path: "data"
         )
-        return Single.create { [refresh, tokenProvider] single in
-            return refresh.subscribe(
-                onSuccess: { response in
-                    tokenProvider.updateToken(token: response.attributes)
-                    single(.success(response.attributes))
-                },
-                onFailure: { error in
-                    single(.failure(error))
-                }
-            )
-        }
+        return refresh.map { $0.attributes }
     }
     
     private func debugRequest(target: TargetType, data: Data? = nil, error: Error? = nil) {

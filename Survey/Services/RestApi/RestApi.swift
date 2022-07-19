@@ -11,6 +11,7 @@ import RxSwift
 protocol RestApi {
     func request<T: Decodable>(_ target: TargetType, path: String?) -> Single<T>
     func requestData(_ target: TargetType) -> Single<Data>
+    func refreshToken() -> Single<AccessToken?>
 }
 
 extension RestApi {

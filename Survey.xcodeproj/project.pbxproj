@@ -37,6 +37,7 @@
 		A76153B4288013270046AACF /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B3288013270046AACF /* DateView.swift */; };
 		A76153B6288013FE0046AACF /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B5288013FE0046AACF /* DateUtils.swift */; };
 		A76153B828801B090046AACF /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B728801B090046AACF /* Survey.swift */; };
+		A7622E7D28871A2E00299EA5 /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7622E7C28871A2E00299EA5 /* AuthInterceptor.swift */; };
 		A762ECFE288051BE00CDE2D3 /* SurveyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762ECFD288051BE00CDE2D3 /* SurveyResponse.swift */; };
 		A762ED00288053D800CDE2D3 /* SurveyTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762ECFF288053D800CDE2D3 /* SurveyTarget.swift */; };
 		A762ED02288053E700CDE2D3 /* SurveyRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A762ED01288053E700CDE2D3 /* SurveyRepositoryImpl.swift */; };
@@ -129,6 +130,7 @@
 		A76153B3288013270046AACF /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		A76153B5288013FE0046AACF /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		A76153B728801B090046AACF /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		A7622E7C28871A2E00299EA5 /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		A762ECFD288051BE00CDE2D3 /* SurveyResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyResponse.swift; sourceTree = "<group>"; };
 		A762ECFF288053D800CDE2D3 /* SurveyTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyTarget.swift; sourceTree = "<group>"; };
 		A762ED01288053E700CDE2D3 /* SurveyRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyRepositoryImpl.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				A7BDD105287BE20400121199 /* TargetType.swift */,
 				A7BDD109287C006400121199 /* RestApi.swift */,
 				A7BDD10B287C2B9100121199 /* AlamofireRestApi.swift */,
+				A7622E7C28871A2E00299EA5 /* AuthInterceptor.swift */,
 			);
 			path = RestApi;
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 				A784CDEE28817F1C00B37EE6 /* SideMenuViewController.swift in Sources */,
 				A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */,
 				A75B5CB6287D64A800C28A1E /* SplashViewController.swift in Sources */,
+				A7622E7D28871A2E00299EA5 /* AuthInterceptor.swift in Sources */,
 				A75B5CB8287D64C000C28A1E /* SplashViewModel.swift in Sources */,
 				A76153B4288013270046AACF /* DateView.swift in Sources */,
 				A7BDD110287C306400121199 /* SurveyRepository.swift in Sources */,
