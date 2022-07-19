@@ -21,7 +21,7 @@ class SplashViewModel: ViewModel, ViewModelType {
     }
     
     private let signedIn = BehaviorSubject<Bool?>(value: nil)
-    
+            
     func transform(input: Input) -> Output {
         input.trigger.drive(onNext: { [weak self] in
             self?.signedIn.onNext(
