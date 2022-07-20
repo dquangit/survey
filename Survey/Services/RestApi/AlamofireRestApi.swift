@@ -14,13 +14,16 @@ class AlamofireRestApi: RestApi {
     
     private let resolver: Resolver
     private let adapter: AuthRequestAdapter
+    private let sessionManager: Alamofire.SessionManager
     
     init(resolver: Resolver) {
         self.resolver = resolver
         self.adapter = AuthRequestAdapter(resolver: resolver)
-        let sessionManager = Alamofire.SessionManager.default
-        sessionManager.adapter = adapter
-        sessionManager.retrier = adapter
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = Constants.requestTimeOutInterval
+        self.sessionManager = Alamofire.SessionManager(configuration: config)
+        self.sessionManager.adapter = adapter
+        self.sessionManager.retrier = adapter
     }
     
     func request<T: Decodable>(_ target: TargetType, path: String?) -> Single<T> {
@@ -40,7 +43,7 @@ class AlamofireRestApi: RestApi {
             return self.requestHeader(target)
                 .subscribe(
                     onSuccess: { headers in
-                        Alamofire.request(
+                        self.sessionManager.request(
                             URL(string: target.baseUrl)!.appendingPathComponent(target.path),
                             method: target.method,
                             parameters: target.parameters,
@@ -53,7 +56,8 @@ class AlamofireRestApi: RestApi {
                                     self.debugRequest(target: target, data: data)
                                     single(.success(data))
                                 case .failure(let error):
-                                    if let error = error as? URLError, error.code == .notConnectedToInternet {
+                                    if let error = error as? URLError,
+                                        (error.code == .notConnectedToInternet || error.code == .timedOut) {
                                         self.debugRequest(target: target, error: ErrorResponse.noInternetConnection)
                                         single(.failure(ErrorResponse.noInternetConnection))
                                         return

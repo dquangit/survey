@@ -19,6 +19,7 @@ target 'Survey' do
   pod 'Kingfisher'
   pod 'SkeletonView'
   pod 'SideMenu'
+  pod 'Connectivity'
 
   target 'SurveyTests' do
     inherit! :search_paths

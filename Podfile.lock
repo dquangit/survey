@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.8.2)
+  - Connectivity (5.0.0)
   - Cuckoo (1.8.0):
     - Cuckoo/Swift (= 1.8.0)
   - Cuckoo/Swift (1.8.0)
@@ -26,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.8.2)
+  - Connectivity
   - Cuckoo
   - IQKeyboardManagerSwift
   - KeychainAccess
@@ -44,6 +46,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - Connectivity
     - Cuckoo
     - IQKeyboardManagerSwift
     - KeychainAccess
@@ -62,6 +65,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Connectivity: e990703fb8d8db54649ea05facac92000cc0f3eb
   Cuckoo: 33cc15762a936352265c30396069f1cb160d9596
   IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
@@ -78,6 +82,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Swinject: 97112918bd7e0785dc2df7036213f3c8cbba6586
 
-PODFILE CHECKSUM: 3a801d130f9f8c8fd93012d953648eedc9057e45
+PODFILE CHECKSUM: 8998ea8c7cf7605d2e1ef39f2b5460bcc7ff1d66
 
 COCOAPODS: 1.11.3

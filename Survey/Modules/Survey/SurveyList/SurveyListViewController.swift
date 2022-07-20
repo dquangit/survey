@@ -18,7 +18,6 @@ class SurveyListViewController: ViewController {
     private let onLoadMore = PublishSubject<Void>()
     private let onPageChanged = BehaviorSubject<Int>(value: 0)
     private var barStyle: UIStatusBarStyle?
-    private var defaultLoading = false
 
     private lazy var dateView = DateView()
 
@@ -210,12 +209,14 @@ class SurveyListViewController: ViewController {
             )
         }).disposed(by: rx.disposeBag)
         
-        isLoading.skip(1).subscribe(onNext: { [weak self] loading in
-            self?.defaultLoading = true
-            if (!loading) {
-                self?.view.stopSkeleton()
+        Observable.combineLatest(isLoading.skip(1).asObservable(), output.surveys.asObservable())
+            .subscribe(onNext: { [weak self] (loading, surveys) in
+                guard let self = self else { return }
+                if (!loading && !surveys.isEmpty) {
+                self.view.stopSkeleton()
             }
         }).disposed(by: rx.disposeBag)
+
             
         Observable.combineLatest(
             output.surveys.asObservable(),
@@ -251,10 +252,6 @@ class SurveyListViewController: ViewController {
     private func backToLogin() {
         let loginVC = resolver.resolve(LoginViewController.self)!
         self.navigationController?.setViewControllers([loginVC], animated: true)
-    }
-    
-    override var defaultLoadingAnimation: Bool {
-        return defaultLoading
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

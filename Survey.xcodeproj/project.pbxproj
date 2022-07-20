@@ -32,6 +32,7 @@
 		A75B5CC8287D8C7E00C28A1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */; };
 		A75B5CCA287D8C8B00C28A1E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */; };
 		A75B5CCC287DA4FD00C28A1E /* ValidationTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */; };
+		A75C97BB2887981E00C97D4F /* ConnectivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75C97BA2887981E00C97D4F /* ConnectivityService.swift */; };
 		A76153B02880073F0046AACF /* SurveyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153AF2880073F0046AACF /* SurveyCollectionViewCell.swift */; };
 		A76153B228800FFF0046AACF /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B128800FFF0046AACF /* ReusableView.swift */; };
 		A76153B4288013270046AACF /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76153B3288013270046AACF /* DateView.swift */; };
@@ -125,6 +126,7 @@
 		A75B5CC7287D8C7E00C28A1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A75B5CC9287D8C8B00C28A1E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A75B5CCB287DA4FD00C28A1E /* ValidationTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationTextField.swift; sourceTree = "<group>"; };
+		A75C97BA2887981E00C97D4F /* ConnectivityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityService.swift; sourceTree = "<group>"; };
 		A76153AF2880073F0046AACF /* SurveyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyCollectionViewCell.swift; sourceTree = "<group>"; };
 		A76153B128800FFF0046AACF /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		A76153B3288013270046AACF /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
@@ -260,6 +262,14 @@
 				A75B5CBE287D7A8600C28A1E /* ImageAsset.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		A75C97B7288797C000C97D4F /* Connectivity */ = {
+			isa = PBXGroup;
+			children = (
+				A75C97BA2887981E00C97D4F /* ConnectivityService.swift */,
+			);
+			path = Connectivity;
 			sourceTree = "<group>";
 		};
 		A762ED0728807DE700CDE2D3 /* SurveyDetails */ = {
@@ -480,6 +490,7 @@
 		A7BDD103287BE1DE00121199 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A75C97B7288797C000C97D4F /* Connectivity */,
 				A77E3A4D287E72CA00BD3D06 /* AccessTokenProvider */,
 				A7BDD104287BE1F000121199 /* RestApi */,
 			);
@@ -869,6 +880,7 @@
 				A7BDD112287C31DA00121199 /* LoginResponse.swift in Sources */,
 				A75B5CBA287D65F300C28A1E /* LibsManager.swift in Sources */,
 				A77E3A51287E7E3100BD3D06 /* AccessToken.swift in Sources */,
+				A75C97BB2887981E00C97D4F /* ConnectivityService.swift in Sources */,
 				A7BDD125287C879400121199 /* AuthRepositoryImpl.swift in Sources */,
 				A75B5CC1287D7AA900C28A1E /* UIImage+Ext.swift in Sources */,
 				A7BDD106287BE20400121199 /* TargetType.swift in Sources */,
