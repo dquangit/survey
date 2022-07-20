@@ -20,6 +20,10 @@ class ServiceAssembly: Assembly {
             UserRepositoryImpl(resolver: resolver)
         }.inObjectScope(.container)
         
+        container.register(ConnectivityService.self) { resolver in
+            ConnectivityServiceImpl()
+        }.inObjectScope(.container)
+        
         container.register(RestApi.self) { resolver in
             AlamofireRestApi(resolver: resolver)
         }

@@ -28,6 +28,7 @@ class SurveyListViewModel: ViewModel, ViewModelType {
     private let pagination = BehaviorRelay<Pagination?>(value: nil)
     private lazy var surveyRepository = resolver.resolve(SurveyRepository.self)!
     private lazy var userRepository = resolver.resolve(UserRepository.self)!
+    private lazy var connectivityService = resolver.resolve(ConnectivityService.self)!
 
     func transform(input: Input) -> Output {
         
@@ -68,6 +69,19 @@ class SurveyListViewModel: ViewModel, ViewModelType {
             .getSurveyList(page: page, size: Pagination.defaultPageSize)
             .trackActivity(loading)
             .trackError(error)
+            .retry(when: { [weak self] error in
+                return error.flatMapLatest { error -> Observable<Void> in
+                    guard let self = self, let errorResponse = error as? ErrorResponse,
+                          errorResponse == ErrorResponse.noInternetConnection else {
+                        return .error(error)
+                        
+                    }
+                    return self.connectivityService
+                        .onConnectStatusChanged
+                        .filter { $0 }
+                        .mapToVoid()
+                }
+            })
             .subscribe(onNext: { [weak self] response in
                 guard let self = self else { return }
                 let responseSurveys = response.data?.compactMap { $0.attributes } ?? []
