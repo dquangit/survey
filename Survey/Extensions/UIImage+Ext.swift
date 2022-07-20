@@ -31,4 +31,21 @@ extension UIImage {
 
         return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(bitmap[3]) / 255)
     }
+    
+    func append(with image: UIImage) -> UIImage {
+        let size = CGSize(width: (size.width), height: (size.height) + (image.size.height))
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        draw(in: CGRect(x:0, y:0, width:size.width, height: (size.height)))
+        image.draw(in: CGRect(x:0, y:(image.size.height), width: size.width,  height: (image.size.height)))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+       return newImage
+    }
+    
+    func crop(rect: CGRect) -> UIImage? {
+        guard let imageRef = cgImage?.cropping(to: rect) else {
+            return nil
+        }
+        return UIImage(cgImage: imageRef)
+    }
 }
