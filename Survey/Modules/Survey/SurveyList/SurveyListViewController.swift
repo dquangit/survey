@@ -263,18 +263,26 @@ class SurveyListViewController: ViewController {
         guard let url = URL(string: urlString) else { return }
         KingfisherManager.shared.retrieveImage(with: url) { [weak self] response in
             guard let self = self else { return }
+            let height = UIApplication.shared.statusBarFrame.height
+            let width = self.collectionView.frame.width
             switch response {
             case .success:
                 let image = self.view.asImage(
                     bounds: CGRect(
                         x: 0,
                         y: 0,
-                        width: self.collectionView.frame.width,
-                        height:  UIApplication.shared.statusBarFrame.height
+                        width: width,
+                        height: height
                     )
                 )
-                let islight = image.isLight ?? false
-                self.updateStatusBar(light: !islight)
+                let cropSize = CGSize(width: width / 3, height: height)
+                let leftCorner = image.crop(rect: CGRect(origin: CGPoint(x: 0, y: 0), size: cropSize))
+                let rightCorner = image.crop(rect: CGRect(origin: CGPoint(x: width * 2/3, y: 0), size: cropSize))
+                var isLight = false
+                if let leftCorner = leftCorner, let rightCorner = rightCorner {
+                    isLight = leftCorner.append(with: rightCorner).isLight ?? false
+                }
+                self.updateStatusBar(light: !isLight)
             default:
                 self.updateStatusBar(light: false)
             }
